@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "207119378431",
+    "project_id": "blackholecafe-d6622",
+    "storage_bucket": "blackholecafe-d6622.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:207119378431:android:00a08de410ce282e1929ca",
+        "android_client_info": {
+          "package_name": "com.example.black_hole"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "207119378431-hkrldsphir2oj573dm55c50j06l8kg2p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAOdrKBfhqJLK037rk2Q5TLIX6SbAhN7g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "207119378431-hkrldsphir2oj573dm55c50j06l8kg2p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
