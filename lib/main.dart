@@ -1,4 +1,4 @@
-import  'package:black_hole/LoginPage.dart';
+import 'package:black_hole/LoginPage.dart';
 import 'package:black_hole/src/slider.dart';
 import 'package:flutter/material.dart';
 import 'CenteralPage.dart';
