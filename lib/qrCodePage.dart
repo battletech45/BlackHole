@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:qrscan/qrscan.dart' as scanner;
+//import 'package:qr_code_scanner/qr_code_scanner.dart' as scanner;
 
 
 class qrCodePage extends StatefulWidget {
@@ -37,7 +37,7 @@ class _qrCodePageState extends State<qrCodePage> {
                 color: Colors.blue,
                 textColor: Colors.white,
                 splashColor: Colors.blueGrey,
-                onPressed: _scan,
+                //onPressed: _scan,
                 child: const Text('Start Camera Scan'),
               ),
             )
@@ -45,10 +45,11 @@ class _qrCodePageState extends State<qrCodePage> {
         ),
       ));
   }
-
+/*
   Future _scan() async {
+
     await Permission.camera.request();
-    String barcode = await scanner.scan();
+    String barcode = await scanner.BarcodeFormat.values.toString();
     if(barcode == null) {
       print('nothing return');
     }
@@ -56,4 +57,5 @@ class _qrCodePageState extends State<qrCodePage> {
       this._outputController.text = barcode;
     }
   }
+  */
 }

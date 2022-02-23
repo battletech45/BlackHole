@@ -41,12 +41,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     _user = await FirebaseAuth.instance.currentUser;
     await helperFunctions.getUserNameSharedPreference().then((value) {
       setState(() {
-        _userName = value;
+        _userName = _user.displayName;
       });
     });
     await helperFunctions.getUserEmailSharedPreference().then((value) {
       setState(() {
-        _email = value;
+        _email = _user.email;
       });
     });
   }
@@ -61,7 +61,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       return CoffeeListPage();
     }
     else if(_selectedIndex == 3) {
-      return ProfilePage(email: _email, userName: _userName);
+      return ProfilePage();
     }
   }
 

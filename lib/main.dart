@@ -1,5 +1,4 @@
 import 'package:black_hole/LoginPage.dart';
-import 'package:black_hole/src/slider.dart';
 import 'package:flutter/material.dart';
 import 'CenteralPage.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -27,72 +26,41 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
 
-  bool _slided = true;
-
   @override
   Widget build(BuildContext context) {
-    if (_slided == true) {
-      return MaterialApp(
-        home: Scaffold(
-          backgroundColor: Colors.black,
-          body: new Container(
-            margin: const EdgeInsets.only(top: 240.0),
-            child: new Column(
-              children: <Widget>[
-                Image.asset(
-                    'assets/BH_AccretionDisk_Sim_Stationary_WebSize.gif'),
-                SliderButton(
-                    action: () {
-                      setState(() {
-                        _slided = !_slided;
-                      });
-                    },
-                    label: Text('Sürüklenmeyi başlat!'),
-                    backgroundColor: Colors.black,
-                    buttonColor: Colors.black,
-                    icon: Center(
-                        child: Icon(Icons.wb_sunny, color: Colors.yellow)))
-              ],
-            ),
+    return MaterialApp(
+      home: Scaffold(
+        backgroundColor: Colors.black,
+        body: new Container(
+          margin: const EdgeInsets.only(top: 100.0),
+          child: new Column(
+            children: <Widget>[
+              Image.asset('assets/BH_AccretionDisk_Sim_Stationary_WebSize.gif'),
+              SizedBox(height: 100.0),
+              new Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    IconButton(icon: Icon(Icons.local_cafe),
+                        color: Colors.brown,
+                        iconSize: 40,
+                        onPressed: () {
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(builder: (context) =>
+                                  CenteralPage()));
+                        }),
+                    IconButton(icon: Icon(Icons.local_cafe),
+                        color: Colors.brown,
+                        iconSize: 40,
+                        onPressed: () {
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(builder: (context) =>
+                                  SignInPage()));
+                        }),
+                  ]),
+            ],
           ),
         ),
-      );
-    }
-    if (_slided == false) {
-      return MaterialApp(
-        home: Scaffold(
-          backgroundColor: Colors.black,
-          body: new Container(
-            margin: const EdgeInsets.only(top: 240.0),
-            child: new Column(
-              children: <Widget>[
-                Image.asset(
-                    'assets/BH_AccretionDisk_Sim_Stationary_WebSize.gif'),
-                new Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      IconButton(icon: Icon(Icons.local_cafe),
-                          color: Colors.brown,
-                          iconSize: 40,
-                          onPressed: () {
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (context) =>
-                                    CenteralPage()));
-                          }),
-                      IconButton(icon: Icon(Icons.local_cafe),
-                          color: Colors.brown,
-                          iconSize: 40,
-                          onPressed: () {
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (context) =>
-                                    SignInPage()));
-                          }),
-                    ]),
-              ],
-            ),
-          ),
-        ),
-      );
-    }
+      ),
+    );
   }
 }

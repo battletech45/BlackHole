@@ -40,7 +40,7 @@ class _CoffeeListPageState extends State<CoffeeListPage> {
       stream: _items,
       builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if(snapshot.hasData) {
-          var data = snapshot.data.data();
+          var data = snapshot.data;
           if (data['items'] != null) {
             if (data['items'].length != 0) {
               return GridView.builder(
