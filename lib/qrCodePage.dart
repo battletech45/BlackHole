@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
-//import 'package:qr_code_scanner/qr_code_scanner.dart' as scanner;
+
 
 
 class qrCodePage extends StatefulWidget {
