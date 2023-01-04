@@ -1,9 +1,10 @@
 import 'package:black_hole/CenteralPage.dart';
+import 'package:black_hole/main.dart';
 import 'package:black_hole/src/Firebase_Functions.dart';
 import 'package:black_hole/src/helperFunctions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
 import 'RegisterPage.dart';
 
 class SignInPage extends StatefulWidget {
@@ -29,14 +30,13 @@ class _SignInPageState extends State<SignInPage> {
         _isLoading = true;
       });
 
-      await _auth.signInWithEmailAndPassword(email, password).then((
-          result) async {
+      await _auth.signInWithEmailAndPassword(email, password).then((result) async {
         if (result != null) {
           QuerySnapshot userInfoSnapshot = await FirebaseFunctions().getUserData(email);
 
           await helperFunctions.saveUserLoggedInSharedPreference(true);
           await helperFunctions.saveUserEmailSharedPreferences(email);
-          //await helperFunctions.saveUserNameSharedPreference(userInfoSnapshot.docs[0].data()['fullName']);
+          await helperFunctions.saveUserNameSharedPreference(userInfoSnapshot.docs[0].get('fullName'));
 
           Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => CenteralPage()));
         }
@@ -53,16 +53,25 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
+      appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: Colors.black,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MyApp())
+          ),
+        ),
+      ),
       body: Form(
           key: _formKey,
           child: Container(
+            alignment: Alignment.center,
             color: Colors.black,
               child: ListView(
               padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 80.0),
               children: <Widget>[
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(height: 30.0),
 
@@ -80,7 +89,6 @@ class _SignInPageState extends State<SignInPage> {
                       validator: (val) {
                         return RegExp(
                             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-
                             .hasMatch(val)
                             ? null
                             : "Please enter a valid email";
