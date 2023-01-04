@@ -1,30 +1,41 @@
 import 'package:black_hole/LoginPage.dart';
 import 'package:flutter/material.dart';
-import 'CenteralPage.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:slider_button/slider_button.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class sliderButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Black Hole Cafe',
-      home: WelcomeScreen(),
+    return SliderButton(
+      label: Text('SLIDE TO UNLOCK !', style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold, fontStyle: FontStyle.italic)),
+      action: () {
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SignInPage()));
+      },
+      icon: Center(
+        child: Icon(Icons.coffee),
+      ),
+      backgroundColor: Colors.brown[800],
+      buttonColor: Colors.brown[500],
+      buttonSize: 60.0,
+      width: 250.0,
+      radius: 25.0,
+      height: 60.0,
     );
   }
 }
 
-class WelcomeScreen extends StatefulWidget {
+class MyApp extends StatefulWidget {
   @override
-  _WelcomeScreenState createState() => _WelcomeScreenState();
+  _MyAppState createState() => _MyAppState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
+class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
@@ -32,31 +43,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       home: Scaffold(
         backgroundColor: Colors.black,
         body: new Container(
-          margin: const EdgeInsets.only(top: 100.0),
-          child: new Column(
+          alignment: Alignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Image.asset('assets/BH_AccretionDisk_Sim_Stationary_WebSize.gif'),
               SizedBox(height: 100.0),
-              new Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    IconButton(icon: Icon(Icons.local_cafe),
-                        color: Colors.brown,
-                        iconSize: 40,
-                        onPressed: () {
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(builder: (context) =>
-                                  CenteralPage()));
-                        }),
-                    IconButton(icon: Icon(Icons.local_cafe),
-                        color: Colors.brown,
-                        iconSize: 40,
-                        onPressed: () {
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(builder: (context) =>
-                                  SignInPage()));
-                        }),
-                  ]),
+              sliderButton()
             ],
           ),
         ),
