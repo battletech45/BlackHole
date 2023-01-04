@@ -33,7 +33,7 @@ class _qrCodePageState extends State<qrCodePage> {
           children: <Widget>[
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-              child: RaisedButton(
+              child: MaterialButton(
                 color: Colors.blue,
                 textColor: Colors.white,
                 splashColor: Colors.blueGrey,

@@ -19,8 +19,7 @@ class CoffeeTile extends StatelessWidget {
                 return AlertDialog(
                   backgroundColor: Colors.brown,
                   content: Stack(
-                    overflow: Overflow.visible,
-                    children: <Widget>[
+                    clipBehavior: Clip.none, children: <Widget>[
                       Positioned(
                         right: -40.0,
                         top: -40.0,

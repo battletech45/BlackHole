@@ -119,7 +119,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     SizedBox(
                       width: double.infinity,
                       height: 50.0,
-                      child: RaisedButton(
+                      child: MaterialButton(
                           elevation: 0.0,
                           color: Colors.brown,
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
