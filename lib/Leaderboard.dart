@@ -9,38 +9,38 @@ class Leaderboard extends StatefulWidget {
 }
 
 class _LeaderboardState extends State<Leaderboard> {
-  int length;
+  Stream<QuerySnapshot> _users;
 
   @override
   void initState() {
     super.initState();
-    _getLength();
+    _getData();
   }
 
-  _getLength() async {
-    final QuerySnapshot qSnap = await FirebaseFirestore.instance.collection('users').get();
-    final int collecLength = qSnap.docs.length;
+  _getData() async {
+    final usersSnapshot = await FirebaseFirestore.instance.collection('users').snapshots();
     setState(() {
-      length = collecLength;
+      _users = usersSnapshot;
     });
   }
 
-  Widget Leaderboard() {
-    final userRef = FirebaseFirestore.instance.collection('users');
-    userRef.get().then((snapshot) {
-      snapshot.docs.forEach((doc) {
-        print(doc.data()['fullName']);
-        print(doc.data()['email']);
-        /*return ListView.builder(
+  Widget LeaderboardBody() {
+    return StreamBuilder <QuerySnapshot>(
+      stream: _users,
+      builder: (context, snapshot) {
+        return snapshot.hasData ?
+        ListView.builder(
+          itemCount: snapshot.data.docs.length,
+          shrinkWrap: true,
           itemBuilder: (context, index) {
-            return ListTile(
-              title: Text(doc.data()['fullName']),
-              subtitle: Text(doc.data()['point'].toString()),
+            return LeaderboardItem(
+              userName: snapshot.data.docs[index].get("fullName"),
+              point: snapshot.data.docs[index].get("point"),
             );
-          },
-        );*/
-      });
-    });
+          }
+        ) : CircularProgressIndicator();
+      },
+    );
   }
 
   @override
@@ -48,9 +48,11 @@ class _LeaderboardState extends State<Leaderboard> {
     return Scaffold(
       backgroundColor: Colors.brown,
       appBar: AppBar(
-        title: Text('SKOR TABLOSU',style: TextStyle(color: Colors.brown, fontSize: 30.0, fontStyle: FontStyle.italic, fontWeight: FontWeight.bold)),
+        elevation: 0.0,
+        backgroundColor: Colors.brown,
+        title: Text('SKOR TABLOSU',style: TextStyle(fontSize: 30.0, fontStyle: FontStyle.italic, fontWeight: FontWeight.bold)),
       ),
-      body: Leaderboard(),
+      body: LeaderboardBody(),
     );
   }
 }
