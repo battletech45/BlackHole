@@ -5,49 +5,18 @@ import 'ProfilePage.dart';
 import 'Leaderboard.dart';
 import 'CoffeeListPage.dart';
 
-class CenteralPage extends StatelessWidget {
+class CentralPage extends StatefulWidget {
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MyStatefulWidget(),
-    );
-  }
+  _CentralPageState createState() => _CentralPageState();
 }
 
-class MyStatefulWidget extends StatefulWidget {
-
-  @override
-  _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
-}
-
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+class _CentralPageState extends State<CentralPage> {
   int _selectedIndex = 0;
-  String _userName = '';
-  String _email = '';
-  User _user;
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-    });
-  }
-  @override
-  initState() {
-    super.initState();
-    _getUsernameAndEmail();
-  }
-  _getUsernameAndEmail() async {
-    _user = await FirebaseAuth.instance.currentUser;
-    await helperFunctions.getUserNameSharedPreference().then((value) {
-      setState(() {
-        _userName = _user.displayName;
-      });
-    });
-    await helperFunctions.getUserEmailSharedPreference().then((value) {
-      setState(() {
-        _email = _user.email;
-      });
     });
   }
 
@@ -82,19 +51,19 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           BottomNavigationBarItem(
             icon: Image.asset('assets/leader_gray.png', width: 24.0, height: 24.0),
             activeIcon: Image.asset('assets/leader_indigo.png', width: 24.0, height: 24.0),
-            label: 'leaderboard',
+            label: 'Leaderboard',
             backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
             icon: Image.asset('assets/menu_gray.png', width: 24.0, height: 24.0),
             activeIcon: Image.asset('assets/menu_indigo.png', width: 24.0, height: 24.0),
-            label: 'menu',
+            label: 'Menu',
             backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
             icon: Image.asset('assets/profile_grey.png', width: 24.0, height: 24.0),
             activeIcon: Image.asset('assets/profile_indigo.png', width: 24.0, height: 24.0),
-            label: 'profile',
+            label: 'Profile',
             backgroundColor: Colors.black,
           )
         ],

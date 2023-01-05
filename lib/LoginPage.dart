@@ -38,7 +38,7 @@ class _SignInPageState extends State<SignInPage> {
           await helperFunctions.saveUserEmailSharedPreferences(email);
           await helperFunctions.saveUserNameSharedPreference(userInfoSnapshot.docs[0].get('fullName'));
 
-          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => CenteralPage()));
+          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => CentralPage()));
         }
         else {
           setState(() {

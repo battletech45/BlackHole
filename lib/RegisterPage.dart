@@ -36,7 +36,7 @@ class _RegisterPageState extends State<RegisterPage> {
           await helperFunctions.saveUserLoggedInSharedPreference(true);
           await helperFunctions.saveUserEmailSharedPreferences(email);
           await helperFunctions.saveUserNameSharedPreference(fullName);
-          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => CenteralPage()));
+          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => CentralPage()));
         }
         else {
           setState(() {
