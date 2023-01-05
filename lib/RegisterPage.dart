@@ -1,4 +1,5 @@
 import 'package:black_hole/CenteralPage.dart';
+import 'package:black_hole/main.dart';
 import 'package:black_hole/src/Firebase_Functions.dart';
 import 'package:black_hole/src/helperFunctions.dart';
 import 'package:flutter/material.dart';
@@ -50,6 +51,15 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: Colors.black,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MyApp())
+          ),
+        ),
+      ),
       body: Form(
           key: _formKey,
           child: Container(
