@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>207119378431-5qmru5slr5chh969aq859tl5qrnj5cpo.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.207119378431-5qmru5slr5chh969aq859tl5qrnj5cpo</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>207119378431-n5uga18vtgon6hnd4h8c3bdmgc2027g1.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCSs6xd2ixI4CNAtm51ZdQBwTlSCzwdSNU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>207119378431</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.blackHole</string>
+	<key>PROJECT_ID</key>
+	<string>blackholecafe-d6622</string>
+	<key>STORAGE_BUCKET</key>
+	<string>blackholecafe-d6622.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:207119378431:ios:abf1a00e3d843cf91929ca</string>
+</dict>
+</plist>
