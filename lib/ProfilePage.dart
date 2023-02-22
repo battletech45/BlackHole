@@ -1,11 +1,26 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+
+  FirebaseAuth _user = FirebaseAuth.instance;
+  String userName = '';
+
+  @override
+  void initState() {
+    super.initState();
+    userName = _user.currentUser.uid;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('PROFİLİM', style: TextStyle(color: Colors.brown, fontSize: 30.0, fontStyle: FontStyle.italic, fontWeight: FontWeight.bold)),
+        title: Text('PROFILE', style: TextStyle(color: Colors.brown, fontSize: 30.0, fontStyle: FontStyle.italic, fontWeight: FontWeight.bold)),
         backgroundColor: Colors.black,
         elevation: 0.0,
       ),
@@ -26,7 +41,7 @@ class ProfilePage extends StatelessWidget {
                       radius: 50.0,
                     ),
                     SizedBox(height: 10.0),
-                    Text('Person', style: TextStyle(fontSize: 22.0, color: Colors.white)),
+                    Text('$userName', style: TextStyle(fontSize: 22.0, color: Colors.white)),
                     SizedBox(height: 10.0),
                     Card(
                       margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
