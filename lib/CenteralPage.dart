@@ -20,20 +20,6 @@ class _CentralPageState extends State<CentralPage> {
     });
   }
 
-  Widget showSelectedPage(int _selectedIndex) {
-    if(_selectedIndex == 0) {
-    }
-    else if(_selectedIndex == 1) {
-      return Leaderboard();
-    }
-    else if(_selectedIndex == 2) {
-      return CoffeeListPage();
-    }
-    else if(_selectedIndex == 3) {
-      return ProfilePage();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
