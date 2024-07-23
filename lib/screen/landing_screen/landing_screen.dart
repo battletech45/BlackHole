@@ -5,11 +5,14 @@ import 'package:flutter/cupertino.dart';
 
 import '../../core/constant/colors.dart';
 import '../../core/constant/navigation.dart';
+import '../../core/constant/ui_const.dart';
 import '../../core/util/circle.dart';
 import '../../widget/loading/loading.dart';
 import '../home_screen/home_screen.dart';
 
 class LandingScreen extends StatefulWidget implements AppScreen {
+  const LandingScreen({super.key});
+
   @override
   State<LandingScreen> createState() => _LandingScreenState();
 
@@ -35,7 +38,6 @@ class _LandingScreenState extends State<LandingScreen> with SingleTickerProvider
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      backgroundColor: AppColor.primary,
       backgroundImage: false,
       child: Column(
         children: <Widget>[

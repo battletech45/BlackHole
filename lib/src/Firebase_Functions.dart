@@ -2,24 +2,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseFunctions {
-  final String userID;
-
-  FirebaseFunctions({this.userID});
 
   final CollectionReference coffeeCollection = FirebaseFirestore.instance.collection('menu');
   final CollectionReference userCollection = FirebaseFirestore.instance.collection('users');
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
-  ModelUser _userFromFirebaseUser(User user) {
-    return (user != null) ? ModelUser(userID: user.uid) : null;
-  }
 
   Future<Stream<DocumentSnapshot>> getItems() async {
     return FirebaseFirestore.instance.collection('menu').doc('hRtDOwlN89qrLvQeWTIW').snapshots();
   }
 
   Future updateUserData(String fullName, String email, String password) async {
-    return await userCollection.doc(userID).set({
+    return await userCollection.doc().set({
       'fullName': fullName,
       'email': email,
       'password': password,

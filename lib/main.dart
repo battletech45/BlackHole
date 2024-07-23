@@ -1,18 +1,17 @@
+import 'package:black_hole/core/constant/ui_const.dart';
+import 'package:black_hole/core/service/provider/theme.dart';
 import 'package:black_hole/firebase_options.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:black_hole/screen/landing_screen/landing_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/date_symbol_data_local.dart' as intl;
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/constant/navigation.dart';
 
-late AuthProvider authProvider;
-const appLocale = Locale('tr', 'TR');
+late String themeStr;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,8 +19,6 @@ void main() async {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge, overlays: [SystemUiOverlay.top]);
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(systemNavigationBarColor: Colors.transparent, systemStatusBarContrastEnforced: true));
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  Intl.defaultLocale = 'tr_TR';
-  intl.initializeDateFormatting('tr_TR', '');
   await Future.delayed(const Duration(seconds: 1));
   runApp(BlackHoleApp());
 }
@@ -29,24 +26,21 @@ void main() async {
 class BlackHoleApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    AppUI.init(context);
     return MultiProvider(
-      providers: [],
+      providers: [
+        ChangeNotifierProvider(create: (context) => ThemeProvider(themeString: themeStr))
+      ],
       builder: (context, __) {
         return ScreenUtilInit(
-          designSize: const Size(393, 808),
+          designSize: const Size(375, 812),
           builder: (context, __) {
+            context.read<ThemeProvider>().init(context);
             return MaterialApp(
               navigatorKey: AppNavigation.navigatorKey,
               debugShowCheckedModeBanner: false,
               theme: context.watch<ThemeProvider>().selected,
               navigatorObservers: [AppNavigatorObserver()],
-              localizationsDelegates: const [
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate
-              ],
-              supportedLocales: const [appLocale],
-              locale: appLocale,
               home: const LandingScreen(),
               builder: (context, child) {
                 return MediaQuery(
@@ -59,5 +53,19 @@ class BlackHoleApp extends StatelessWidget {
         );
       },
     );
+  }
+}
+
+Future<void> providerInit() async {
+  themeStr = await checkSharedForTheme();
+}
+
+Future<String> checkSharedForTheme() async {
+  final shared = await SharedPreferences.getInstance();
+
+  if (shared.containsKey('theme')) {
+    return shared.getString('theme')!;
+  } else {
+    return 'platform';
   }
 }
