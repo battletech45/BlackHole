@@ -1,7 +1,5 @@
-import 'package:black_hole/LeaderboardItem.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class Leaderboard extends StatefulWidget {
   @override
@@ -30,7 +28,7 @@ class _LeaderboardState extends State<Leaderboard> {
       builder: (context, snapshot) {
         return snapshot.hasData ?
         ListView.builder(
-          itemCount: snapshot.data.docs.length,
+          itemCount: snapshot.data.size,
           shrinkWrap: true,
           itemBuilder: (context, index) {
             return LeaderboardItem(

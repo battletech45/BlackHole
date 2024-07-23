@@ -44,17 +44,4 @@ class _qrCodePageState extends State<qrCodePage> {
         ),
       ));
   }
-/*
-  Future _scan() async {
-
-    await Permission.camera.request();
-    String barcode = await scanner.BarcodeFormat.values.toString();
-    if(barcode == null) {
-      print('nothing return');
-    }
-    else {
-      this._outputController.text = barcode;
-    }
-  }
-  */
 }
