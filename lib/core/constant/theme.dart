@@ -76,7 +76,7 @@ class AppTheme {
   );
 
   static DialogTheme dialogTheme = DialogTheme(
-    shape: AppUI.rectangelBorder,
+    shape: AppUI.rectangleBorder,
     surfaceTintColor: Colors.transparent,
   );
 
@@ -111,7 +111,7 @@ class AppTheme {
   static final _cardTheme = CardTheme(
     surfaceTintColor: Colors.transparent,
     color: AppColor.cardBGLight,
-    shape: AppUI.rectangelBorder.copyWith(side: const BorderSide(color: AppColor.borderColor, width: 1, style: BorderStyle.solid)),
+    shape: AppUI.rectangleBorder.copyWith(side: const BorderSide(color: AppColor.borderColor, width: 1, style: BorderStyle.solid)),
     margin: EdgeInsets.zero,
     elevation: 0,
   );
@@ -119,20 +119,20 @@ class AppTheme {
   static final _cardThemeDark = CardTheme(
     surfaceTintColor: Colors.transparent,
     color: AppColor.cardBGDark,
-    shape: AppUI.rectangelBorder,
+    shape: AppUI.rectangleBorder,
     margin: EdgeInsets.zero,
     elevation: 0,
   );
 
   static final _snackBarThemeData = SnackBarThemeData(
-    shape: AppUI.rectangelBorder,
+    shape: AppUI.rectangleBorder,
     behavior: SnackBarBehavior.floating,
     showCloseIcon: true,
     backgroundColor: AppColor.cardBGLight,
   );
 
   static final _snackBarThemeDataDark = SnackBarThemeData(
-    shape: AppUI.rectangelBorder,
+    shape: AppUI.rectangleBorder,
     behavior: SnackBarBehavior.floating,
     showCloseIcon: true,
     backgroundColor: AppColor.cardBGDark,
@@ -174,14 +174,14 @@ class AppTheme {
   static FilledButtonThemeData filledButtonTheme = FilledButtonThemeData(
     style: FilledButton.styleFrom(
       foregroundColor: AppColor.cardBGDark,
-      shape: AppUI.rectangelBorder,
+      shape: AppUI.rectangleBorder,
       textStyle: AppTextStyle.bigButtonText,
     ),
   );
   static final _textButtonTheme = TextButtonThemeData(
     style: TextButton.styleFrom(
       foregroundColor: AppColor.cardBGDark,
-      shape: AppUI.rectangelBorder,
+      shape: AppUI.rectangleBorder,
       textStyle: AppTextStyle.smallButtonText,
     ),
   );
@@ -189,7 +189,7 @@ class AppTheme {
   static final _textButtonThemeDark = TextButtonThemeData(
     style: TextButton.styleFrom(
       foregroundColor: AppColor.cardBGDark,
-      shape: AppUI.rectangelBorder,
+      shape: AppUI.rectangleBorder,
       textStyle: AppTextStyle.smallButtonText,
     ),
   );

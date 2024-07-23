@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../core/constant/assets.dart';
+import '../../core/constant/colors.dart';
 
 class AppScaffold extends StatelessWidget {
   const AppScaffold({
@@ -42,7 +44,12 @@ class AppScaffold extends StatelessWidget {
       ),
       appBar: appBar,
       extendBody: extendBody,
-      floatingActionButton: floatingActionButton,
+      floatingActionButton: IconButton(
+        color: AppColor.buttonBG,
+        icon: SvgPicture.asset(AppAsset.notificationIcon),
+        onPressed: () {},
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: bottomNavigationBar,
     );
   }

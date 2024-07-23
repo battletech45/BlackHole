@@ -7,6 +7,7 @@ class AppTextStyle {
 
   static TextStyle authTitle = TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w800);
   static TextStyle authText = TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400, color: AppColor.onboardText);
+  static TextStyle registerText = TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600);
   static TextStyle buttonTextStyle = TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, color: AppColor.buttonText);
 
   static TextStyle bigButtonText = TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600);

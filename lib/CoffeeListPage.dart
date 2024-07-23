@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'src/Firebase_Functions.dart';
-import 'src/ListSettings.dart';
 
 class CoffeeListPage extends StatefulWidget {
   @override
@@ -10,12 +8,9 @@ class CoffeeListPage extends StatefulWidget {
 
 class _CoffeeListPageState extends State<CoffeeListPage> {
 
-  Stream<DocumentSnapshot> _items;
-
   @override
   void initState() {
     super.initState();
-    _getItems();
   }
 
   Widget noCoffeeWidget() {
@@ -41,7 +36,7 @@ class _CoffeeListPageState extends State<CoffeeListPage> {
       builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if(snapshot.hasData) {
           var data = snapshot.data;
-          if (data['items'] != null) {
+          if (data != null && data['items'] != null) {
             if (data['items'].length != 0) {
               return GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
@@ -68,14 +63,6 @@ class _CoffeeListPageState extends State<CoffeeListPage> {
         }
       },
     );
-  }
-
-  _getItems() async {
-    FirebaseFunctions().getItems().then((Stream<DocumentSnapshot> snapshots) {
-      setState(() {
-        _items = snapshots;
-      });
-    });
   }
 
   @override

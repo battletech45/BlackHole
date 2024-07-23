@@ -5,7 +5,9 @@ import '../service/log.dart';
 enum ScreenName {
   landing('landing'),
   home('home'),
-
+  cart('cart'),
+  favorites('favorites'),
+  profile('profile'),
   dialog('dialog'),
   bottomSheet('bottomSheet');
 
@@ -17,6 +19,8 @@ class AppNavigation{
   const AppNavigation._();
 
   static var navigationList = <ScreenName>[ScreenName.landing];
+
+  static var bottomNavBarNavigationList = <ScreenName>[ScreenName.home, ScreenName.cart, ScreenName.favorites, ScreenName.profile];
 
   static ScreenName get currentRouteName => navigationList.last;
 

@@ -21,7 +21,7 @@ class AppUI {
   static const horizontal = EdgeInsets.symmetric(horizontal: paddingValue);
   static Radius radius = const Radius.circular(radiusValue).r;
   static BorderRadius cardBorderRadius = BorderRadius.circular(radiusValue).r;
-  static RoundedRectangleBorder rectangelBorder = RoundedRectangleBorder(borderRadius: cardBorderRadius);
+  static RoundedRectangleBorder rectangleBorder = RoundedRectangleBorder(borderRadius: cardBorderRadius);
 
   static SizedBox verticalBlankSpace = 21.vb;
   static SizedBox horizontalBlankSpace = 12.hb;

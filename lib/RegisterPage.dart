@@ -1,6 +1,6 @@
 import 'package:black_hole/CenteralPage.dart';
 import 'package:black_hole/main.dart';
-import 'package:black_hole/src/Firebase_Functions.dart';
+import 'package:black_hole/src/firebase.dart';
 import 'package:black_hole/src/helperFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
