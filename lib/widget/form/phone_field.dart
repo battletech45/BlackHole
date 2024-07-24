@@ -20,12 +20,16 @@ class PhoneField extends StatelessWidget {
       initialValue: initialValue,
       decoration: InputDecoration(
         border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(15.r),
-            borderSide: BorderSide(color: AppColor.borderColor, width: 1)
+            borderRadius: BorderRadius.circular(25.r),
+            borderSide: BorderSide(color: AppColor.hintTextColor, width: 1)
+        ),
+        enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25.r),
+            borderSide: BorderSide(color: AppColor.hintTextColor, width: 1)
         ),
         focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(15.r),
-            borderSide: BorderSide(color: AppColor.hintTextColor, width: 1)
+            borderRadius: BorderRadius.circular(25.r),
+            borderSide: BorderSide(color: AppColor.selectedBorderColor, width: 1)
         ),
         contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 0).r,
         hintStyle: AppTextStyle.smallButtonText.copyWith(color: AppColor.iconColor),
@@ -36,7 +40,7 @@ class PhoneField extends StatelessWidget {
       showDropdownIcon: false,
       flagsButtonMargin: AppUI.horizontal,
       languageCode: 'tr',
-      style: AppTextStyle.smallButtonText.copyWith(color: AppColor.hintTextColor),
+      style: AppTextStyle.smallButtonText.copyWith(color: AppColor.iconColor),
       validator: AppValidator.phoneNumberValidator,
       pickerDialogStyle: PickerDialogStyle(
         searchFieldInputDecoration: const InputDecoration(hintText: 'Ara..', contentPadding: EdgeInsets.symmetric(horizontal: AppUI.paddingValue)),

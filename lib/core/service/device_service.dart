@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'log.dart';
 
 enum DeviceType { phone, tablet, other }
@@ -16,7 +15,7 @@ class DeviceService {
   }
 
   static void _initDeviceType() {
-    LogService.logLn('Initialize device type...');
+    LoggerService.logInfo('Initialize device type...');
     if (_size.shortestSide < 600) {
       _deviceType = DeviceType.phone;
     } else if (_size.shortestSide >= 600 && _size.shortestSide < 1400) {
@@ -24,7 +23,7 @@ class DeviceService {
     } else {
       _deviceType = DeviceType.other;
     }
-    LogService.logLn('DeviceType: $_deviceType');
+    LoggerService.logInfo('DeviceType: $_deviceType');
   }
 
   static DeviceType get deviceType => _deviceType;

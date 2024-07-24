@@ -1,11 +1,7 @@
-import 'dart:convert';
-
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import '../constant/navigation.dart';
-import '../model/screen.dart';
-import 'dialog_route.dart';
+import '../constant/ui_const.dart';
 
 extension BlankSpace on num {
   /// [vb] verilen yükseklikte bir SizedBox(height: vb) döndürür
@@ -31,8 +27,8 @@ extension StringMultipler on String {
 }
 
 extension DateTimeUtils on DateTime {
-  /// Verilen aralıktaki günleri `List<DateTime>` formatında döndürür
-  List<DateTime> betweenDays(DateTime other, {bool lastDayIncluded = false}) {
+  /// Verilen aralıktaki günleri [List<DateTime>] formatında döndürür
+  List<DateTime> betweenDays(DateTime other) {
     DateTime date1 = this;
     if ((this).isSameDay(other)) {
       return <DateTime>[DateTime(date1.year, date1.month, date1.day)];
@@ -49,7 +45,6 @@ extension DateTimeUtils on DateTime {
       }
 
       while (!date1.isAfter(other)) {
-        if (other == date1 && lastDayIncluded == false) break;
         days.add(date1);
         date1 = date1.add(const Duration(days: 1));
       }
@@ -58,81 +53,9 @@ extension DateTimeUtils on DateTime {
     }
   }
 
-  /// [other] ile aynı ay içerisinde olup olmadığını kontrol eder
-  bool isSameMonth(DateTime other) => year == other.year && month == other.month;
-
-  /// [other] ile aynı gün olup olmadığını kontrol eder
   bool isSameDay(DateTime other) {
     return (this).year == other.year && (this).month == other.month && (this).day == other.day;
   }
-
-  /// [other] ile aynı dakika olup olmadığını kontrol eder
-  bool isSameMinute(DateTime other) {
-    return year == other.year && month == other.month && day == other.day && hour == other.hour && minute == other.minute;
-  }
-
-  bool isBeforeMinute(DateTime other) {
-    if (year < other.year) {
-      return true;
-    } else if (year > other.year) {
-      return false;
-    }
-
-    if (month < other.month) {
-      return true;
-    } else if (month > other.month) {
-      return false;
-    }
-
-    if (day < other.day) {
-      return true;
-    } else if (day > other.day) {
-      return false;
-    }
-
-    if (hour < other.hour) {
-      return true;
-    } else if (hour > other.hour) {
-      return false;
-    }
-
-    return minute < other.minute;
-  }
-
-  bool isAfterMinute(DateTime other) {
-    if (year > other.year) {
-      return true;
-    } else if (year < other.year) {
-      return false;
-    }
-
-    if (month > other.month) {
-      return true;
-    } else if (month < other.month) {
-      return false;
-    }
-
-    if (day > other.day) {
-      return true;
-    } else if (day < other.day) {
-      return false;
-    }
-
-    if (hour > other.hour) {
-      return true;
-    } else if (hour < other.hour) {
-      return false;
-    }
-
-    return minute > other.minute;
-  }
-
-  String toMonthString() => '$year-${month.toString().padLeft(2, '0')}';
-
-  DateTime get lastDayOfMonth => DateTime(year, month + 1, 0);
-  DateTime get firstDayOfMonth => DateTime(year, month, 1);
-
-  DateTime get onlyDate => DateTime(year, month, day);
 }
 
 extension DurationExtension on int {
@@ -143,39 +66,9 @@ extension DurationExtension on int {
   Duration get millisecond => Duration(milliseconds: this);
 }
 
-extension DeviceExt on BuildContext {
+extension ThemeExt on BuildContext {
   bool get isDark => Theme.of(this).brightness == Brightness.dark;
   bool get isTablet => MediaQuery.of(this).size.shortestSide >= 600;
-}
-
-extension FormDataExt on FormData {
-  String get toJson {
-    var m = <String, dynamic>{};
-    m.addEntries(fields);
-    m.addEntries(files);
-    var json = jsonEncode(m);
-    return json;
-  }
-
-  String get multiline {
-    var str = '\n{';
-    for (var f in fields) {
-      if (f == fields.first) {
-        str = '$str\n  "${f.key}":"${f.value}"';
-      } else {
-        str = '$str,\n  "${f.key}":"${f.value}"';
-      }
-    }
-    for (var f in files) {
-      if (f == files.first) {
-        str = '$str\n  "${f.key}":"${f.value}"';
-      } else {
-        str = '$str,\n  "${f.key}":"${f.value}"';
-      }
-    }
-    str = '$str\n}';
-    return str;
-  }
 }
 
 extension JsonExt on Map<String, dynamic> {
@@ -198,13 +91,13 @@ extension DurationTextExt on Duration {
     if (inDays > 0) {
       str += '$inDays Gün ';
     }
-    if (inHours > 0 && inHours % 24 != 0) {
+    if (inHours > 0) {
       str += '${inHours % 24} Saat ';
     }
-    if (inMinutes > 0 && inMinutes % 60 != 0) {
+    if (inMinutes > 0) {
       str += '${inMinutes % 60} Dakika ';
     }
-    if (inSeconds > 0 && inSeconds % 60 != 0) {
+    if (inSeconds > 0) {
       str += '${inSeconds % 60} Saniye';
     }
     return str;
@@ -285,36 +178,59 @@ extension DialogExtension on BuildContext {
   ///```
   ///Şeklinde kullanılabilir
   Future<T?> showAppDialog<T extends Object?>(
-    Widget child, {
-    RouteSettings? settings,
-  }) {
-    return AppNavigation.state.push<T>(
+      Widget child, {
+        RouteSettings? settings,
+      }) {
+    return rootKey.currentState!.push<T>(
       AppDialogRoute<T>(
         builder: (_) => child,
         settings: settings,
       ),
     );
   }
-
-  Future<T?> push<T extends Object?>(Widget screen, {RouteSettings? settings}) async {
-    return AppNavigation.state.push(MaterialPageRoute(builder: (_) => screen, settings: settings));
-  }
-
-  Future<T?> pushScreen<T extends Object?>(AppScreen screen, {Object? args}) async {
-    return AppNavigation.state.push(
-      MaterialPageRoute(builder: (_) => screen, settings: RouteSettings(name: screen.name.name, arguments: args)),
-    );
-  }
-
-  Future<T?> pushAndRemoveUntil<T extends Object?>(AppScreen screen, RoutePredicate? predicate, {Object? args}) async {
-    return AppNavigation.state.pushAndRemoveUntil(
-      MaterialPageRoute(builder: (_) => screen, settings: RouteSettings(name: screen.name.name)),
-      predicate ?? (route) => route.isFirst,
-    );
-  }
-
-  void pop<T extends Object?>([Object? result]) async {
-    return AppNavigation.state.pop(result);
-  }
 }
 
+class AppDialogRoute<T> extends PopupRoute<T> {
+  AppDialogRoute({
+    required this.builder,
+    this.dismissible = true,
+    super.settings,
+  });
+
+  final WidgetBuilder builder;
+  final bool dismissible;
+
+  @override
+  Color? get barrierColor => Colors.black45;
+
+  @override
+  bool get barrierDismissible => dismissible;
+
+  @override
+  String? get barrierLabel => "label";
+
+  @override
+  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+    return builder(context);
+  }
+
+  @override
+  Widget buildTransitions(
+      BuildContext context,
+      Animation<double> animation,
+      Animation<double> secondaryAnimation,
+      Widget child,
+      ) {
+    Animation<double> anim2 = CurvedAnimation(parent: animation, curve: Curves.bounceOut, reverseCurve: Curves.linear);
+    return FadeTransition(
+      opacity: animation,
+      child: ScaleTransition(
+        scale: Tween<double>(begin: 0.6, end: 1).animate(anim2),
+        child: child,
+      ),
+    );
+  }
+
+  @override
+  Duration get transitionDuration => AppUI.animationDuration;
+}

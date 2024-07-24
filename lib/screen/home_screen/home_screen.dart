@@ -1,25 +1,36 @@
-import 'package:black_hole/core/constant/navigation.dart';
-import 'package:black_hole/core/model/screen.dart';
-import 'package:black_hole/widget/base/bottom_navbar.dart';
-import 'package:black_hole/widget/base/scaffold.dart';
+import 'package:black_hole/core/constant/ui_const.dart';
+import 'package:black_hole/widget/header/home_header.dart';
+import 'package:black_hole/widget/slider/home_slider.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class HomeScreen extends StatefulWidget implements AppScreen {
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
   @override
   State<HomeScreen> createState() => _HomeScreenState();
-
-  @override
-  ScreenName get name => ScreenName.home;
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMixin {
+
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
-    return AppScaffold(
-      bottomNavigationBar: AppBottomNavBar(
-        currentIndex: AppNavigation.bottomNavBarNavigationList.indexOf(widget.name),
+    super.build(context);
+    return SafeArea(
+      child: Padding(
+        padding: AppUI.pagePadding / 3,
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              HomeHeader(),
+              HomeCategorySlider(data: []),
+              AppUI.verticalBlankSpace,
+            ],
+          ),
+        ),
       ),
-      child: SingleChildScrollView(),
     );
   }
 }

@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../src/firebase.dart';
+import '../firebase.dart';
 import '../../model/login.dart';
 
 class AutherProvider with ChangeNotifier {
@@ -21,26 +21,26 @@ class AutherProvider with ChangeNotifier {
   }
 
   Future<LoginModel?> _readShared() async {
-    LogService.logLn('Starting to read Shared');
+    LoggerService.logInfo('Starting to read Shared');
     final pref = await SharedPreferences.getInstance();
     if (pref.containsKey(_loginKey)) {
       final tmpJson = pref.getString(_loginKey);
-      LogService.logLn('$_loginKey key exists. jsonString: $tmpJson');
+      LoggerService.logInfo('$_loginKey key exists. jsonString: $tmpJson');
       if (tmpJson != null) {
         final model = LoginModel.fromJson(tmpJson);
-        LogService.logLn('$_loginKey key is NOT null. loginModel: $model');
+        LoggerService.logInfo('$_loginKey key is NOT null. loginModel: $model');
         return model;
       }
     }
-    LogService.logLn('Reading completed. No loginModel in Shared');
+    LoggerService.logInfo('Reading completed. No loginModel in Shared');
     return null;
   }
 
   Future<bool> writeShared(LoginModel model) async {
-    LogService.logLn('Starting to write Shared $model');
+    LoggerService.logInfo('Starting to write Shared $model');
     final pref = await SharedPreferences.getInstance();
     bool b = await pref.setString(_loginKey, model.toJson());
-    LogService.logLn('Writing completed. success: $b');
+    LoggerService.logInfo('Writing completed. success: $b');
     notifyListeners();
     return b;
   }
@@ -57,7 +57,7 @@ class AutherProvider with ChangeNotifier {
       }
     }
     catch(e) {
-      LogService.logError(name: e.toString());
+      LoggerService.logError(e.toString());
       rethrow;
     }
   }
@@ -78,17 +78,17 @@ class AutherProvider with ChangeNotifier {
       }
     }
     catch(e) {
-      LogService.logError(name: e.toString());
+      LoggerService.logError(e.toString());
       return null;
     }
   }
 
   Future<bool> _clearLogin() async {
     user = null;
-    LogService.logLn('Starting to clear login model in shared');
+    LoggerService.logInfo('Starting to clear login model in shared');
     final pref = await SharedPreferences.getInstance();
     bool b = await pref.remove(_loginKey);
-    LogService.logLn('Clear completed. success: $b');
+    LoggerService.logInfo('Clear completed. success: $b');
     return b;
   }
 

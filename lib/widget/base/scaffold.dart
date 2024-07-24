@@ -44,12 +44,8 @@ class AppScaffold extends StatelessWidget {
       ),
       appBar: appBar,
       extendBody: extendBody,
-      floatingActionButton: IconButton(
-        color: AppColor.buttonBG,
-        icon: SvgPicture.asset(AppAsset.notificationIcon),
-        onPressed: () {},
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: floatingActionButton,
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
       bottomNavigationBar: bottomNavigationBar,
     );
   }

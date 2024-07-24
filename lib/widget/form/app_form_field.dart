@@ -80,7 +80,7 @@ class _AppFormFieldState extends State<AppFormField> {
       autocorrect: true,
       enableIMEPersonalizedLearning: true,
       enableSuggestions: true,
-      style: AppTextStyle.authText.copyWith(color: AppColor.hintTextColor),
+      style: AppTextStyle.authText.copyWith(color: AppColor.iconColor),
       onFieldSubmitted: widget.onFieldSubmitted,
       textCapitalization: widget.textCapitalization,
       onTapOutside: (event) {
@@ -93,7 +93,11 @@ class _AppFormFieldState extends State<AppFormField> {
       decoration: InputDecoration(
         border: widget.border ?? OutlineInputBorder(
             borderRadius: BorderRadius.circular(25.r),
-            borderSide: BorderSide(color: AppColor.borderColor, width: 1)
+            borderSide: BorderSide(color: AppColor.hintTextColor, width: 1)
+        ),
+        enabledBorder: widget.border ?? OutlineInputBorder(
+          borderRadius: BorderRadius.circular(25.r),
+          borderSide: BorderSide(color: AppColor.hintTextColor, width: 1)
         ),
         focusedBorder: widget.selectedBorder ?? OutlineInputBorder(
             borderRadius: BorderRadius.circular(25.r),
@@ -102,7 +106,7 @@ class _AppFormFieldState extends State<AppFormField> {
         prefixIcon: widget.prefixIcon,
         contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: widget.isBigField ? 12 : 0).r,
         hintText: widget.hintText,
-        hintStyle: AppTextStyle.smallButtonText.copyWith(color: AppColor.iconColor),
+        hintStyle: AppTextStyle.smallButtonText.copyWith(color: AppColor.hintTextColor),
         helperText: widget.helperText ?? "",
         suffixIcon: widget.obscureText
             ? IconButton(

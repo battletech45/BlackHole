@@ -17,7 +17,7 @@ class AppUI {
 
   static const double paddingValue = 20;
 
-  static const double radiusValue = 6;
+  static const double radiusValue = 20;
   static const horizontal = EdgeInsets.symmetric(horizontal: paddingValue);
   static Radius radius = const Radius.circular(radiusValue).r;
   static BorderRadius cardBorderRadius = BorderRadius.circular(radiusValue).r;
@@ -54,6 +54,6 @@ class AppUI {
     screenSize = MediaQuery.of(context).size;
     safeArea = MediaQuery.of(context).padding;
     didInit = true;
-    LogService.logLn('AppUI init: SCREEN SIZE: $screenSize');
+    LoggerService.logInfo('AppUI init: SCREEN SIZE: $screenSize');
   }
 }

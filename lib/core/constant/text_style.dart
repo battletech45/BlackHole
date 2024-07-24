@@ -5,6 +5,7 @@ import 'colors.dart';
 class AppTextStyle {
   AppTextStyle._();
 
+  static TextStyle homeHeader = TextStyle(fontSize: 26.sp, fontWeight: FontWeight.w800);
   static TextStyle authTitle = TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w800);
   static TextStyle authText = TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400, color: AppColor.onboardText);
   static TextStyle registerText = TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600);

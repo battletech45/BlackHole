@@ -7,11 +7,14 @@ import 'package:black_hole/widget/button/loading_button.dart';
 import 'package:black_hole/widget/form/app_form_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../core/constant/colors.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -25,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return AppScaffold(
       backgroundImage: false,
-      child: SingleChildScrollView(
+      child: Padding(
         padding: AppUI.pagePadding,
         child: Form(
           key: _formKey,
@@ -33,11 +36,11 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               SvgPicture.asset(AppAsset.authIcon),
-              AppUI.verticalBlankSpace,
-              Text('Welcome Back!', style: AppTextStyle.authTitle),
-              AppUI.verticalBlankSpace,
+              AppUI.verticalGap(),
+              Text('Welcome Back!', style: AppTextStyle.authTitle.copyWith(color: AppColor.titleDark)),
+              AppUI.verticalGap(0.5),
               Text('Please enter your account here', style: AppTextStyle.authText),
-              AppUI.verticalBlankSpace,
+              AppUI.verticalGap(),
               AppFormField(
                 hintText: 'Email',
                 controller: emailController,
@@ -45,9 +48,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 keyboardType: TextInputType.emailAddress,
                 autofillHints: const [AutofillHints.email],
                 textInputAction: TextInputAction.next,
-                prefixIcon: SvgPicture.asset(AppAsset.messageIcon),
+                prefixIcon: Padding(
+                  padding: AppUI.pagePadding,
+                  child: SvgPicture.asset(AppAsset.messageIcon),
+                ),
               ),
-              AppUI.verticalBlankSpace,
               AppFormField(
                 hintText: 'Password',
                 controller: passwordController,
@@ -55,47 +60,62 @@ class _LoginScreenState extends State<LoginScreen> {
                 keyboardType: TextInputType.visiblePassword,
                 autofillHints: const [AutofillHints.password],
                 textInputAction: TextInputAction.done,
-                prefixIcon: SvgPicture.asset(AppAsset.lockIcon),
+                prefixIcon: Padding(
+                  padding: AppUI.pagePadding,
+                  child: SvgPicture.asset(AppAsset.lockIcon),
+                ),
               ),
-              AppUI.verticalBlankSpace,
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   Text('Forgot password?', style: AppTextStyle.authText)
                 ],
               ),
-              AppUI.verticalBlankSpace,
-              LoadingButton(
-                onTap: () async {},
-                backgroundColor: AppColor.buttonBG,
-                child: Text('Login', style: AppTextStyle.buttonTextStyle)
+              AppUI.verticalGap(),
+              SizedBox(
+                height: 55.h,
+                width: 250.w,
+                child: LoadingButton(
+                  onTap: () async {
+                    context.go('/');
+                  },
+                  backgroundColor: AppColor.buttonBG,
+                  child: Text('Login', style: AppTextStyle.buttonTextStyle)
+                ),
               ),
-              AppUI.verticalBlankSpace,
-              Text('Or continue with', style: AppTextStyle.authText.copyWith(color: AppColor.productTitleBGDark)),
-              LoadingButton(
-                  onTap: () async {},
-                  backgroundColor: AppColor.white,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      SvgPicture.asset(AppAsset.googleIcon),
-                      AppUI.horizontalBlankSpace,
-                      Text('Google', style: AppTextStyle.bigButtonText)
-                    ],
-                  )
+              AppUI.verticalGap(),
+              Text('Or continue with', style: AppTextStyle.authText.copyWith(color: AppColor.borderColor)),
+              AppUI.verticalGap(),
+              SizedBox(
+                height: 55.h,
+                width: 250.w,
+                child: LoadingButton(
+                    onTap: () async {},
+                    backgroundColor: AppColor.searchBGLight,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Image.asset(AppAsset.googleIcon),
+                        AppUI.horizontalBlankSpace,
+                        Text('Google', style: AppTextStyle.bigButtonText)
+                      ],
+                    )
+                ),
               ),
-              AppUI.verticalBlankSpace,
+              AppUI.verticalGap(),
               Text.rich(
                 TextSpan(
                   text: "Don't have an account ? ",
-                  style: AppTextStyle.authText.copyWith(color: AppColor.productTitleBGDark),
+                  style: AppTextStyle.authText.copyWith(color: AppColor.borderColor),
                   children: <TextSpan>[
                     TextSpan(
-                      text: 'Register',
+                      text: 'Sign Up',
                       style: AppTextStyle.registerText.copyWith(color: AppColor.buttonBG),
                       recognizer: TapGestureRecognizer()
-                        ..onTap = ()  {},
+                        ..onTap = ()  {
+                        context.go('/register');
+                        },
                     ),
                   ],
                 ),
