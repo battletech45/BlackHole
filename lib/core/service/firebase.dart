@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../model/category.dart';
+import '../model/menu.dart';
 
 class FirebaseService {
   //Private Constructor

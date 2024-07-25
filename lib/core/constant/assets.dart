@@ -2,8 +2,10 @@ class AppAsset {
   const AppAsset._();
 
   static const appLogo = 'assets/images/appLogo.jpg';
-  static const appBG = 'assets/images/bean_bg.svg';
-  static const productBG = 'assets/images/product_bg.svg';
+  static const testPhoto = 'assets/images/tesPhoto.png';
+  static const appBG = 'assets/images/bean_bg.png';
+  static const productBG = 'assets/images/product_bg.png';
+  static const productTest = 'assets/images/splash.jpg';
 
   static const nameChangeIcon = 'assets/icons/name.svg';
   static const phoneIcon = 'assets/icons/phone.svg';

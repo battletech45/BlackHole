@@ -1,18 +1,17 @@
-import 'package:black_hole/core/constant/ui_const.dart';
+import 'package:black_hole/core/model/menu.dart';
 import 'package:black_hole/screen/auth_screen/login_screen.dart';
 import 'package:black_hole/screen/auth_screen/register_screen.dart';
 import 'package:black_hole/screen/home_screen/home_screen.dart';
 import 'package:black_hole/screen/landing_screen/landing_screen.dart';
+import 'package:black_hole/screen/product_screen/product_detail_screen.dart';
 import 'package:black_hole/widget/base/scaffold.dart';
 import 'package:black_hole/widget/loading/loading.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../widget/base/bottom_navbar.dart';
-import 'assets.dart';
 import 'colors.dart';
 
 const rootKey = GlobalObjectKey<NavigatorState>('root');
@@ -61,10 +60,18 @@ class AppRouterConfig {
           name: 'Kayıt Sayfası',
           builder: (context, state) => const RegisterScreen()
         ),
+        GoRoute(
+          path: '/product_detail',
+          parentNavigatorKey: rootKey,
+          name: 'Ürün Detay Sayfası',
+          builder: (context, state) => ProductDetailScreen(model: state.extra as MenuItemModel)
+        ),
         StatefulShellRoute.indexedStack(
           parentNavigatorKey: rootKey,
           builder: (context, state, navigationShell) {
             return AppScaffold(
+              backgroundImage: true,
+              backgroundColor: AppColor.black,
               bottomNavigationBar: AppBottomNavBar(
                 currentIndex: navigationShell.currentIndex,
               ),

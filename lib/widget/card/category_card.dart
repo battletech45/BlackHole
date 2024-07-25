@@ -18,11 +18,12 @@ class CategoryCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: AppUI.pagePadding / 2,
+        margin: EdgeInsets.only(right: 10.w),
+        padding: AppUI.horizontal / 1.5,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.r),
           border: Border.all(
-            color: isSelected ? AppColor.selectedBorderColor : Colors.transparent
+            color: isSelected ? AppColor.selectedBorderColor : AppColor.borderColor
           ),
         ),
         child: Row(
@@ -30,8 +31,11 @@ class CategoryCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            CachedNetworkImage(imageUrl: imageURL),
-            AppUI.horizontalBlankSpace,
+            Padding(
+              padding: AppUI.pageVerticalPadding / 4,
+              child: Image.asset(imageURL),
+            ),
+            AppUI.horizontalGap(0.1),
             Text(title, style: AppTextStyle.smallButtonText.copyWith(color: isSelected ? AppColor.selectedBorderColor : AppColor.white))
           ],
         ),

@@ -81,6 +81,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 keyboardType: TextInputType.visiblePassword,
                 autofillHints: const [AutofillHints.password],
                 textInputAction: TextInputAction.done,
+                obscureText: true,
                 prefixIcon: Padding(
                   padding: AppUI.pagePadding,
                   child: SvgPicture.asset(AppAsset.lockIcon),

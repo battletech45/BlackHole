@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MenuItemModel {
   final String title;
-  final String extra;
+  final String? extra;
   final String description;
   final String imageURL;
   final List<String> ingredients;

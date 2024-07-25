@@ -19,36 +19,34 @@ class HomeHeader extends StatelessWidget {
           children: <Widget>[
             Text('Hello, ${context.watch<AutherProvider>().user?.displayName ?? 'Coffee Bean'}', style: AppTextStyle.homeHeader),
             Container(
-              padding: AppUI.pagePadding / 4,
+              padding: AppUI.pageFullPadding(context) / 2,
               decoration: BoxDecoration(
                   color: AppColor.cardBGDark,
-                  borderRadius: BorderRadius.circular(25.r)
+                  borderRadius: BorderRadius.circular(15.r)
               ),
-              child: Icon(Icons.search, color: AppColor.white),
+              child: Icon(Icons.search),
             )
           ],
         ),
-        AppUI.verticalBlankSpace,
+        AppUI.verticalGap(0.75),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Icon(Icons.location_on),
             AppUI.horizontalBlankSpace,
-            Text('You are always at Black Hole ☕')
+            Text('You are always at Black Hole ☕', style: AppTextStyle.addressText.copyWith(color: AppColor.addressTextColor))
           ],
         ),
-        Container(
-          padding: AppUI.pagePadding / 2,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15.r)
+        AppUI.verticalGap(0.75),
+        AppFormField(
+          hintText: 'Search here...',
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15.r),
+            borderSide: BorderSide(color: Colors.transparent, width: 1)
           ),
-          child: AppFormField(
-            hintText: 'Search here...',
-            prefixIcon: Icon(Icons.search, color: AppColor.white),
-          ),
+          prefixIcon: Icon(Icons.search, color: AppColor.white),
         ),
-        AppUI.verticalBlankSpace
       ],
     );
   }

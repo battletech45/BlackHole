@@ -1,10 +1,11 @@
-import 'package:black_hole/core/model/category.dart';
+import 'package:black_hole/core/constant/ui_const.dart';
+import 'package:black_hole/core/model/menu.dart';
 import 'package:black_hole/widget/card/category_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeCategorySlider extends StatefulWidget {
-  final List<MenuItemModel>? data;
+  late List<MenuItemModel>? data;
 
   HomeCategorySlider({super.key, required this.data});
 
@@ -24,7 +25,7 @@ class _HomeCategorySliderState extends State<HomeCategorySlider> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 55.h,
+      height: 40.h,
       width: MediaQuery.of(context).size.width,
       child: ListView.builder(
           shrinkWrap: true,

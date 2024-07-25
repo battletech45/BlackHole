@@ -42,7 +42,10 @@ class AppUI {
 
   static SizedBox get zeroGap => const SizedBox.shrink();
 
+  static EdgeInsets productCardPadding = const EdgeInsets.symmetric(horizontal: 12).r;
   static EdgeInsets pagePadding = const EdgeInsets.symmetric(horizontal: paddingValue).r;
+  static EdgeInsets pageVerticalPadding = EdgeInsets.symmetric(vertical: paddingValue).r;
+  static EdgeInsets pageFullSidePadding = const EdgeInsets.all(paddingValue).r;
   static EdgeInsets inputTopMargin = const EdgeInsets.only(top: 5).r;
   static EdgeInsets pageScrollPadding(BuildContext context) => EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom + paddingValue).r;
 

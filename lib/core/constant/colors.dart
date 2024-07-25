@@ -7,6 +7,8 @@ class AppColor {
   static const buttonText = Color(0xffF0CEAB);
   static const hintTextColor = Color(0xff313131);
   static const onboardText = Color(0xff896E59);
+  static const addressTextColor = Color(0xffFFA15B);
+  static const starColor = Color(0xffE58034);
   static const borderColor = Color(0xff919499);
   static const iconColor = Color(0xffC8C8C8);
   static const selectedBorderColor = Color(0xff9B6842);
