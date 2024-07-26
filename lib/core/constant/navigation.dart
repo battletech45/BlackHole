@@ -1,6 +1,8 @@
 import 'package:black_hole/core/model/menu.dart';
 import 'package:black_hole/screen/auth_screen/login_screen.dart';
 import 'package:black_hole/screen/auth_screen/register_screen.dart';
+import 'package:black_hole/screen/cart_screen/cart_screen.dart';
+import 'package:black_hole/screen/favorite_screen/favorite_screen.dart';
 import 'package:black_hole/screen/home_screen/home_screen.dart';
 import 'package:black_hole/screen/landing_screen/landing_screen.dart';
 import 'package:black_hole/screen/product_screen/product_detail_screen.dart';
@@ -74,17 +76,9 @@ class AppRouterConfig {
               backgroundColor: AppColor.black,
               bottomNavigationBar: AppBottomNavBar(
                 currentIndex: navigationShell.currentIndex,
-              ),
-              floatingActionButton: Container(
-                decoration: BoxDecoration(
-                  color: AppColor.buttonBG,
-                  borderRadius: BorderRadius.circular(50.r)
-                ),
-                padding: EdgeInsets.all(5.r),
-                child: IconButton(
-                  color: AppColor.white,
-                  icon: Icon(Icons.notifications),
-                  onPressed: () {},
+                onTap: (index) => navigationShell.goBranch(
+                  index,
+                  initialLocation: index == navigationShell.currentIndex,
                 ),
               ),
               child: navigationShell,
@@ -102,6 +96,24 @@ class AppRouterConfig {
                   ),
                 ]
             ),
+            StatefulShellBranch(
+                routes: [
+                  GoRoute(
+                    path: '/cart',
+                    name: 'Sepet Sayfası',
+                    builder: (context, state) => const CartScreen()
+                  )
+                ]
+            ),
+            StatefulShellBranch(
+                routes: [
+                  GoRoute(
+                    path: '/favorite',
+                    name: 'Favoriler Sayfası',
+                    builder: (context, state) => FavoriteScreen()
+                  )
+                ]
+            )
           ]
         )
       ]

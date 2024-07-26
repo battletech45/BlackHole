@@ -6,9 +6,10 @@ class SquareButton extends StatelessWidget {
   final Color backgroundColor;
   final Color iconColor;
   final IconData icon;
+  final int paddingScale;
   final void Function() onTap;
 
-  const SquareButton({super.key, required this.backgroundColor, required this.icon, required this.iconColor, required this.onTap});
+  const SquareButton({super.key, required this.backgroundColor, required this.icon, required this.iconColor, required this.onTap, required this.paddingScale});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -18,7 +19,7 @@ class SquareButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.r),
             color: backgroundColor
         ),
-        padding: AppUI.pageFullSidePadding / 2,
+        padding: AppUI.pageFullSidePadding / paddingScale.toDouble(),
         child: Center(child: Icon(icon, color: iconColor)),
       ),
     );

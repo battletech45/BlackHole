@@ -40,9 +40,9 @@ class ProductHeader extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    SquareButton(backgroundColor: AppColor.borderColor.withOpacity(0.5), icon: Icons.arrow_back_ios_new, iconColor: AppColor.white, onTap: () {context.pop();}),
+                    SquareButton(backgroundColor: AppColor.borderColor.withOpacity(0.5), icon: Icons.arrow_back_ios_new, iconColor: AppColor.white, paddingScale: 2, onTap: () {context.pop();}),
                     Text(title, style: AppTextStyle.bigButtonText),
-                    SquareButton(backgroundColor: AppColor.borderColor.withOpacity(0.5), icon: Icons.favorite, iconColor: AppColor.white, onTap: () {context.pop();}),
+                    SquareButton(backgroundColor: AppColor.borderColor.withOpacity(0.5), icon: Icons.favorite, iconColor: AppColor.white, paddingScale: 2, onTap: () {context.pop();}),
                   ],
                 ),
                 AppUI.verticalGap(),

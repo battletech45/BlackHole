@@ -7,13 +7,23 @@ import 'package:black_hole/widget/card/product_title_card.dart';
 import 'package:black_hole/widget/header/product_header.dart';
 import 'package:black_hole/widget/slider/home_slider.dart';
 import 'package:black_hole/widget/tile/ingredient_tile.dart';
+import 'package:black_hole/widget/tile/price_tile.dart';
+import 'package:black_hole/widget/tile/size_tile.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ProductDetailScreen extends StatelessWidget {
+class ProductDetailScreen extends StatefulWidget {
   final MenuItemModel model;
 
   ProductDetailScreen({super.key, required this.model});
+
+  @override
+  State<ProductDetailScreen> createState() => _ProductDetailScreenState();
+}
+
+class _ProductDetailScreenState extends State<ProductDetailScreen> {
+  String selectedSize = 'short';
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
@@ -23,33 +33,60 @@ class ProductDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            ProductHeader(imageURL: model.imageURL, title: model.title),
+            ProductHeader(imageURL: widget.model.imageURL, title: widget.model.title),
             AppUI.verticalGap(),
-            ProductTitleCard(title: model.title, extra: model.extra),
+            ProductTitleCard(title: widget.model.title, extra: widget.model.extra),
             AppUI.verticalGap(),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Text('Description', style: AppTextStyle.productTitle),
-                AppUI.verticalGap(0.3),
-                Text('A cappuaccino is a coffee - based brink made primarily form espresso and milk.'),
-                AppUI.verticalGap(),
-                Text('Ingredients', style: AppTextStyle.productTitle),
-                AppUI.verticalGap(0.3),
-                SizedBox(
-                  height: 40.h,
-                  width: MediaQuery.of(context).size.width,
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: model.ingredients.length,
-                      itemBuilder: (context, index) {
-                        return IngredientTile(title: model.ingredients[index]);
-                      }
+            Padding(
+              padding: AppUI.pagePadding / 2,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text('Description', style: AppTextStyle.productTitle),
+                  AppUI.verticalGap(0.3),
+                  Text('A cappuaccino is a coffee - based brink made primarily form espresso and milk.'),
+                  AppUI.verticalGap(),
+                  Text('Ingredients', style: AppTextStyle.productTitle),
+                  AppUI.verticalGap(0.3),
+                  SizedBox(
+                    height: 40.h,
+                    width: MediaQuery.of(context).size.width,
+                    child: ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: widget.model.ingredients.length,
+                        itemBuilder: (context, index) {
+                          return IngredientTile(title: widget.model.ingredients[index]);
+                        }
+                    ),
                   ),
-                )
-              ],
+                  AppUI.verticalGap(0.3),
+                  Text('Size', style: AppTextStyle.productTitle),
+                  SizedBox(
+                    height: 85.h,
+                    width: MediaQuery.of(context).size.width,
+                    child: ListView.builder(
+                        itemExtent: 90.w,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: widget.model.sizes.length,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  selectedSize = widget.model.sizes[index];
+                                });
+                              },
+                              child: SizeTile(size: widget.model.sizes[index], isSelected: widget.model.sizes[index] == selectedSize)
+                          );
+                        }
+                    ),
+                  ),
+                  AppUI.verticalGap(),
+                  PriceTile(price: widget.model.price),
+                ],
+              ),
             )
           ],
         ),

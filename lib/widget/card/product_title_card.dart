@@ -53,11 +53,11 @@ class ProductTitleCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                SquareButton(backgroundColor: AppColor.borderColor.withOpacity(0.5), icon: Icons.remove, iconColor: AppColor.white, onTap: () {}),
+                SquareButton(backgroundColor: AppColor.borderColor.withOpacity(0.5), icon: Icons.remove, iconColor: AppColor.white,paddingScale: 2, onTap: () {}),
                 AppUI.horizontalGap(0.5),
                 Text('5', style: AppTextStyle.ratingOverallText),
                 AppUI.horizontalGap(0.5),
-                SquareButton(backgroundColor: AppColor.borderColor.withOpacity(0.5), icon: Icons.add, iconColor: AppColor.white, onTap: () {}),
+                SquareButton(backgroundColor: AppColor.borderColor.withOpacity(0.5), icon: Icons.add, iconColor: AppColor.white,paddingScale: 2, onTap: () {}),
               ],
             )
           ],
