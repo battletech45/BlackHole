@@ -1,6 +1,7 @@
 import 'package:black_hole/core/constant/assets.dart';
 import 'package:black_hole/core/constant/text_style.dart';
 import 'package:black_hole/core/constant/ui_const.dart';
+import 'package:black_hole/core/service/provider/auth.dart';
 import 'package:black_hole/core/util/validator.dart';
 import 'package:black_hole/widget/base/scaffold.dart';
 import 'package:black_hole/widget/button/loading_button.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 import '../../core/constant/colors.dart';
 
@@ -91,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 55.h,
                 width: 250.w,
                 child: LoadingButton(
-                    onTap: () async {},
+                    onTap: context.read<AutherProvider>().loginWithGoogle,
                     backgroundColor: AppColor.searchBGLight,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

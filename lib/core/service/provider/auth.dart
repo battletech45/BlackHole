@@ -1,6 +1,7 @@
 import 'package:black_hole/core/service/log.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../firebase.dart';
@@ -80,6 +81,30 @@ class AutherProvider with ChangeNotifier {
     catch(e) {
       LoggerService.logError(e.toString());
       return null;
+    }
+  }
+
+  Future<void> loginWithGoogle() async {
+    GoogleSignIn _googleSignIn = GoogleSignIn();
+
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken
+      );
+      
+      final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+      final User? newUser = userCredential.user;
+
+      if(userCredential.additionalUserInfo?.isNewUser ?? false) {
+        await FirebaseService.createUser(newUser!.uid, newUser.displayName ?? '', newUser.email ?? '', newUser.phoneNumber ?? '');
+      }
+      user = newUser;
+    }
+    catch(e) {
+      LoggerService.logError(e.toString());
     }
   }
 

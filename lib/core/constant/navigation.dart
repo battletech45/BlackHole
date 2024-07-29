@@ -1,5 +1,6 @@
 import 'package:black_hole/core/model/menu.dart';
 import 'package:black_hole/screen/auth_screen/login_screen.dart';
+import 'package:black_hole/screen/auth_screen/profile_screen.dart';
 import 'package:black_hole/screen/auth_screen/register_screen.dart';
 import 'package:black_hole/screen/cart_screen/cart_screen.dart';
 import 'package:black_hole/screen/favorite_screen/favorite_screen.dart';
@@ -113,7 +114,16 @@ class AppRouterConfig {
                     builder: (context, state) => FavoriteScreen()
                   )
                 ]
-            )
+            ),
+            StatefulShellBranch(
+                routes: [
+                  GoRoute(
+                    path: '/profile',
+                    name: 'Profil Sayfası',
+                    builder: (context, state) => const ProfileScreen()
+                  )
+                ]
+            ),
           ]
         )
       ]
