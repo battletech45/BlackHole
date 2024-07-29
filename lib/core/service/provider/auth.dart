@@ -11,13 +11,20 @@ class AutherProvider with ChangeNotifier {
   User? user;
   LoginModel? loginModel;
   final _loginKey = 'login';
+  final _googleKey = 'google';
 
   bool get isAuth => user != null;
 
   Future<void> init() async {
     loginModel = await _readShared();
     if (loginModel != null) {
-      await login(loginModel!);
+        await login(loginModel!);
+    }
+    else {
+      if(FirebaseAuth.instance.currentUser != null) {
+        user = FirebaseAuth.instance.currentUser;
+        LoggerService.logInfo('This user logged in before via Google.');
+      }
     }
   }
 
@@ -37,10 +44,13 @@ class AutherProvider with ChangeNotifier {
     return null;
   }
 
-  Future<bool> writeShared(LoginModel model) async {
+  Future<bool> writeShared(LoginModel model, bool? isGoogle) async {
     LoggerService.logInfo('Starting to write Shared $model');
     final pref = await SharedPreferences.getInstance();
     bool b = await pref.setString(_loginKey, model.toJson());
+    if(isGoogle != null) {
+      await pref.setBool(_googleKey, isGoogle);
+    }
     LoggerService.logInfo('Writing completed. success: $b');
     notifyListeners();
     return b;
@@ -84,7 +94,7 @@ class AutherProvider with ChangeNotifier {
     }
   }
 
-  Future<void> loginWithGoogle() async {
+  Future<bool> loginWithGoogle() async {
     GoogleSignIn _googleSignIn = GoogleSignIn();
 
     try {
@@ -102,9 +112,12 @@ class AutherProvider with ChangeNotifier {
         await FirebaseService.createUser(newUser!.uid, newUser.displayName ?? '', newUser.email ?? '', newUser.phoneNumber ?? '');
       }
       user = newUser;
+      notifyListeners();
+      return true;
     }
     catch(e) {
       LoggerService.logError(e.toString());
+      return false;
     }
   }
 
@@ -132,7 +145,7 @@ class AutherProvider with ChangeNotifier {
     final tmp = await signInWithEmailAndPassWord(model.email, model.password);
     if (tmp != null) {
       user = tmp;
-      await writeShared(model);
+      await writeShared(model, false);
       notifyListeners();
       return null;
     }
@@ -143,7 +156,7 @@ class AutherProvider with ChangeNotifier {
     final tmp = await registerWithEmailAndPassword(name, model.email, model.password, phoneNumber);
     if (tmp != null) {
       user = tmp;
-      await writeShared(model);
+      await writeShared(model, false);
       notifyListeners();
       return null;
     }

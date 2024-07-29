@@ -18,11 +18,7 @@ class FirebaseService {
       'phoneNumber': phoneNumber,
       'createdAt': DateTime.now().millisecondsSinceEpoch,
       'updatedAt': DateTime.now().millisecondsSinceEpoch,
-      'settings': {
-        'notifications': true,
-        'darkMode': false,
-        'language': 'TR'
-      },
+      'isAdmin': false
     });
   }
 

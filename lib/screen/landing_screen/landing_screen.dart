@@ -24,12 +24,7 @@ class _LandingScreenState extends State<LandingScreen> with SingleTickerProvider
     super.initState();
     try {
       SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((value) {
-        if(context.read<AutherProvider>().isAuth) {
-          context.go('/');
-        }
-        else {
-          context.go('/login');
-        }
+        context.go('/');
       });
     }
     catch(e) {

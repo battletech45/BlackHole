@@ -91,6 +91,7 @@ class _AppFormFieldState extends State<AppFormField> {
       maxLines: widget.isBigField ? 5 : 1,
       cursorColor: AppColor.hintTextColor,
       decoration: InputDecoration(
+        fillColor: AppColor.cardBGDark,
         border: widget.border ?? OutlineInputBorder(
             borderRadius: BorderRadius.circular(25.r),
             borderSide: BorderSide(color: AppColor.hintTextColor, width: 1)
@@ -106,7 +107,7 @@ class _AppFormFieldState extends State<AppFormField> {
         prefixIcon: widget.prefixIcon,
         contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: widget.isBigField ? 12 : 0).r,
         hintText: widget.hintText,
-        hintStyle: AppTextStyle.smallButtonText.copyWith(color: AppColor.hintTextColor),
+        hintStyle: AppTextStyle.smallButtonText.copyWith(color: AppColor.borderColor),
         helperText: widget.helperText ?? "",
         suffixIcon: widget.obscureText
             ? IconButton(
