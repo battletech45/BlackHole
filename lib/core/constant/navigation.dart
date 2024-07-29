@@ -7,6 +7,7 @@ import 'package:black_hole/screen/favorite_screen/favorite_screen.dart';
 import 'package:black_hole/screen/home_screen/home_screen.dart';
 import 'package:black_hole/screen/landing_screen/landing_screen.dart';
 import 'package:black_hole/screen/product_screen/product_detail_screen.dart';
+import 'package:black_hole/screen/qr_screen/qr_screen.dart';
 import 'package:black_hole/widget/base/scaffold.dart';
 import 'package:black_hole/widget/loading/loading.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -68,6 +69,12 @@ class AppRouterConfig {
           parentNavigatorKey: rootKey,
           name: 'Ürün Detay Sayfası',
           builder: (context, state) => ProductDetailScreen(model: state.extra as MenuItemModel)
+        ),
+        GoRoute(
+          path: '/qr',
+          parentNavigatorKey: rootKey,
+          name: 'QR sayfası',
+          builder: (context, state) => QrScreen()
         ),
         StatefulShellRoute.indexedStack(
           parentNavigatorKey: rootKey,

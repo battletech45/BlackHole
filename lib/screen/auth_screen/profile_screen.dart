@@ -47,13 +47,18 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
               AppUI.verticalGap(),
-              Container(
-                  padding: AppUI.pageFullSidePadding,
-                  decoration: BoxDecoration(
-                    color: AppColor.cardBGDark,
-                    borderRadius: BorderRadius.circular(15.r)
-                  ),
-                  child: NavigationTile(title: 'About Us')
+              GestureDetector(
+                onTap: () {
+                  context.push('/qr');
+                },
+                child: Container(
+                    padding: AppUI.pageFullSidePadding,
+                    decoration: BoxDecoration(
+                      color: AppColor.cardBGDark,
+                      borderRadius: BorderRadius.circular(15.r)
+                    ),
+                    child: NavigationTile(title: 'QR Okut')
+                ),
               ),
               AppUI.verticalGap(),
               Container(

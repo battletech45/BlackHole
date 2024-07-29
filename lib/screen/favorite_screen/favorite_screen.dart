@@ -1,4 +1,5 @@
 import 'package:black_hole/core/constant/ui_const.dart';
+import 'package:black_hole/screen/favorite_screen/empty_favorite_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -10,17 +11,7 @@ import '../../widget/card/product_card.dart';
 
 class FavoriteScreen extends StatelessWidget {
 
-  final data = [
-    MenuItemModel(title: 'Cappuccino', extra: 'extra', imageURL: AppAsset.testPhoto, description: 'description', ingredients: ['test', 'test'], sizes: ['short', 'tall', 'grande', 'venti'], price: '200'),
-    MenuItemModel(title: 'mest', extra: 'extra', imageURL: AppAsset.productTest, description: 'description', ingredients: ['test', 'test'], sizes: ['short', 'tall', 'grande'], price: '200'),
-    MenuItemModel(title: 'sest', extra: 'extra', imageURL: AppAsset.testPhoto, description: 'description', ingredients: ['test', 'test'], sizes: ['short', 'tall'], price: '200'),
-    MenuItemModel(title: 'sest', extra: 'extra', imageURL: AppAsset.testPhoto, description: 'description', ingredients: ['test', 'test'], sizes: ['short', 'tall'], price: '200'),
-    MenuItemModel(title: 'sest', extra: 'extra', imageURL: AppAsset.testPhoto, description: 'description', ingredients: ['test', 'test'], sizes: ['short', 'tall'], price: '200'),
-    MenuItemModel(title: 'sest', extra: 'extra', imageURL: AppAsset.testPhoto, description: 'description', ingredients: ['test', 'test'], sizes: ['short', 'tall'], price: '200'),
-    MenuItemModel(title: 'sest', extra: 'extra', imageURL: AppAsset.testPhoto, description: 'description', ingredients: ['test', 'test'], sizes: ['short', 'tall'], price: '200'),
-    MenuItemModel(title: 'sest', extra: 'extra', imageURL: AppAsset.testPhoto, description: 'description', ingredients: ['test', 'test'], sizes: ['short', 'tall'], price: '200'),
-    MenuItemModel(title: 'sest', extra: 'extra', imageURL: AppAsset.testPhoto, description: 'description', ingredients: ['test', 'test'], sizes: ['short', 'tall'], price: '200'),
-  ];
+  final data = [];
 
   FavoriteScreen({super.key});
   @override
@@ -28,7 +19,7 @@ class FavoriteScreen extends StatelessWidget {
     return SafeArea(
       child: Padding(
         padding: AppUI.pagePadding / 2,
-        child: SingleChildScrollView(
+        child: data.isEmpty ? EmptyFavoriteScreen() : SingleChildScrollView(
           child: Column(
             children: <Widget>[
               Text('Favorilerin', style: AppTextStyle.homeHeader),

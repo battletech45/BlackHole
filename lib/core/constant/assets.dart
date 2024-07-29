@@ -19,4 +19,6 @@ class AppAsset {
   static const lockIcon = 'assets/icons/auth/lock.svg';
   static const messageIcon = 'assets/icons/auth/message.svg';
   static const googleIcon = 'assets/icons/auth/google_logo.png';
+
+  static const emptyFavLottie = 'assets/lottie/empty_favorite.json';
 }
