@@ -69,7 +69,7 @@ class ProductCard extends StatelessWidget {
                     Text('₺', style: TextStyle(color: AppColor.buttonBG, fontSize: 15.sp))
                   ],
                 ),
-                AddButton()
+                AddButton(function: () {print('Add');})
               ],
             )
           ],

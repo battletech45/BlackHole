@@ -12,6 +12,7 @@ class AutherProvider with ChangeNotifier {
   LoginModel? loginModel;
   final _loginKey = 'login';
   final _googleKey = 'google';
+  bool isAdmin = false;
 
   bool get isAuth => user != null;
 
@@ -19,10 +20,12 @@ class AutherProvider with ChangeNotifier {
     loginModel = await _readShared();
     if (loginModel != null) {
         await login(loginModel!);
+        isAdmin = await FirebaseService.getIsUserAdmin(user!.uid);
     }
     else {
       if(FirebaseAuth.instance.currentUser != null) {
         user = FirebaseAuth.instance.currentUser;
+        isAdmin = await FirebaseService.getIsUserAdmin(user!.uid);
         LoggerService.logInfo('This user logged in before via Google.');
       }
     }
@@ -112,6 +115,7 @@ class AutherProvider with ChangeNotifier {
         await FirebaseService.createUser(newUser!.uid, newUser.displayName ?? '', newUser.email ?? '', newUser.phoneNumber ?? '');
       }
       user = newUser;
+      isAdmin = await FirebaseService.getIsUserAdmin(user!.uid);
       notifyListeners();
       return true;
     }
@@ -145,6 +149,7 @@ class AutherProvider with ChangeNotifier {
     final tmp = await signInWithEmailAndPassWord(model.email, model.password);
     if (tmp != null) {
       user = tmp;
+      isAdmin = await FirebaseService.getIsUserAdmin(user!.uid);
       await writeShared(model, false);
       notifyListeners();
       return null;
@@ -156,6 +161,7 @@ class AutherProvider with ChangeNotifier {
     final tmp = await registerWithEmailAndPassword(name, model.email, model.password, phoneNumber);
     if (tmp != null) {
       user = tmp;
+      isAdmin = await FirebaseService.getIsUserAdmin(user!.uid);
       await writeShared(model, false);
       notifyListeners();
       return null;

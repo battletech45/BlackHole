@@ -7,6 +7,7 @@ import 'package:black_hole/screen/favorite_screen/favorite_screen.dart';
 import 'package:black_hole/screen/home_screen/home_screen.dart';
 import 'package:black_hole/screen/landing_screen/landing_screen.dart';
 import 'package:black_hole/screen/product_screen/product_detail_screen.dart';
+import 'package:black_hole/screen/qr_screen/free_product_screen.dart';
 import 'package:black_hole/screen/qr_screen/qr_reader_screen.dart';
 import 'package:black_hole/screen/qr_screen/qr_screen.dart';
 import 'package:black_hole/widget/base/scaffold.dart';
@@ -16,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../screen/product_screen/add_product_screen.dart';
 import '../../widget/base/bottom_navbar.dart';
 import 'colors.dart';
 
@@ -72,11 +74,35 @@ class AppRouterConfig {
           builder: (context, state) => ProductDetailScreen(model: state.extra as MenuItemModel)
         ),
         GoRoute(
-          path: '/qr',
+            path: '/qrGenerate',
+            parentNavigatorKey: rootKey,
+            name: 'QR Oluşturma Sayfası',
+            builder: (context, state) => const QrScreen()
+        ),
+        // --------------------------------
+        //          ADMİN ROUTES START
+        // --------------------------------
+        GoRoute(
+          path: '/qrRead',
           parentNavigatorKey: rootKey,
           name: 'QR sayfası',
-          builder: (context, state) => QrReaderScreen()
+          builder: (context, state) => const QrReaderScreen()
         ),
+        GoRoute(
+          path: '/qrFree',
+          parentNavigatorKey: rootKey,
+          name: 'QR Hediye Ürün Sayfası',
+          builder: (context, state) => const FreeProductScreen()
+        ),
+        GoRoute(
+          path: '/addProduct',
+          parentNavigatorKey: rootKey,
+          name: 'Ürün Giriş Sayfası',
+          builder: (context, state) => const AddProductScreen()
+        ),
+        // --------------------------------
+        //          ADMİN ROUTES END
+        // --------------------------------
         StatefulShellRoute.indexedStack(
           parentNavigatorKey: rootKey,
           builder: (context, state, navigationShell) {

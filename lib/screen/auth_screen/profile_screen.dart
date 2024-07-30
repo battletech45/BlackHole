@@ -39,7 +39,9 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(25.r),
-                          child: CachedNetworkImage(imageUrl: context.watch<AutherProvider>().user?.photoURL ?? '', width: 70.w, height: 70.h, fit: BoxFit.cover)
+                          child: CachedNetworkImage(imageUrl: context.watch<AutherProvider>().user?.photoURL ?? '', width: 70.w, height: 70.h, fit: BoxFit.cover, errorWidget: (context,___, __) {
+                            return Image.asset(AppAsset.appLogo, width: 70.w, height: 70.h, fit: BoxFit.cover);
+                          })
                       )
                   ),
                   AppUI.horizontalGap(),
@@ -49,45 +51,79 @@ class ProfileScreen extends StatelessWidget {
               AppUI.verticalGap(),
               GestureDetector(
                 onTap: () {
-                  context.push('/qr');
+                  context.push('/qrGenerate');
                 },
-                child: Container(
-                    padding: AppUI.pageFullSidePadding,
-                    decoration: BoxDecoration(
-                      color: AppColor.cardBGDark,
-                      borderRadius: BorderRadius.circular(15.r)
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                        padding: AppUI.pageFullSidePadding,
+                        decoration: BoxDecoration(
+                            color: AppColor.cardBGDark,
+                            borderRadius: BorderRadius.circular(15.r)
+                        ),
+                        child: NavigationTile(title: 'QR Oluştur')
                     ),
-                    child: NavigationTile(title: 'QR Okut')
+                    AppUI.verticalGap(),
+                  ],
                 ),
               ),
-              AppUI.verticalGap(),
-              Container(
-                  padding: AppUI.pageFullSidePadding,
-                  decoration: BoxDecoration(
-                    color: AppColor.cardBGDark,
-                    borderRadius: BorderRadius.circular(15.r)
-                  ),
-                  child: NavigationTile(title: 'About Us')
+              GestureDetector(
+                onTap: () {
+                  context.push('/qrRead');
+                },
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                        padding: AppUI.pageFullSidePadding,
+                        decoration: BoxDecoration(
+                            color: AppColor.cardBGDark,
+                            borderRadius: BorderRadius.circular(15.r)
+                        ),
+                        child: NavigationTile(title: 'QR Okut')
+                    ),
+                    AppUI.verticalGap(),
+                  ],
+                ),
               ),
-              AppUI.verticalGap(),
-              Container(
-                  padding: AppUI.pageFullSidePadding,
-                  decoration: BoxDecoration(
-                    color: AppColor.cardBGDark,
-                    borderRadius: BorderRadius.circular(15.r)
+              Visibility(
+                visible: context.watch<AutherProvider>().isAdmin,
+                child: GestureDetector(
+                  onTap: () {
+                    context.push('/qrFree');
+                  },
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                          padding: AppUI.pageFullSidePadding,
+                          decoration: BoxDecoration(
+                            color: AppColor.cardBGDark,
+                            borderRadius: BorderRadius.circular(15.r)
+                          ),
+                          child: NavigationTile(title: 'Hediye Ürün')
+                      ),
+                      AppUI.verticalGap(),
+                    ],
                   ),
-                  child: NavigationTile(title: 'About Us')
+                ),
               ),
-              AppUI.verticalGap(),
-              Container(
-                  padding: AppUI.pageFullSidePadding,
-                  decoration: BoxDecoration(
-                    color: AppColor.cardBGDark,
-                    borderRadius: BorderRadius.circular(15.r)
-                  ),
-                  child: NavigationTile(title: 'About Us')
+              GestureDetector(
+                onTap: () {
+                  context.push('/addProduct');
+                },
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                        padding: AppUI.pageFullSidePadding,
+                        decoration: BoxDecoration(
+                          color: AppColor.cardBGDark,
+                          borderRadius: BorderRadius.circular(15.r)
+                        ),
+                        child: NavigationTile(title: 'Ürün Ekle')
+                    ),
+                    AppUI.verticalGap(2),
+                  ],
+                ),
               ),
-              AppUI.verticalGap(2),
               GestureDetector(
                 onTap: () async {
                   await context.read<AutherProvider>().signOut().then((e) {

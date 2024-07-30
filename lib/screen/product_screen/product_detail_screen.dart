@@ -5,7 +5,6 @@ import 'package:black_hole/core/model/menu.dart';
 import 'package:black_hole/widget/base/scaffold.dart';
 import 'package:black_hole/widget/card/product_title_card.dart';
 import 'package:black_hole/widget/header/product_header.dart';
-import 'package:black_hole/widget/slider/home_slider.dart';
 import 'package:black_hole/widget/tile/ingredient_tile.dart';
 import 'package:black_hole/widget/tile/price_tile.dart';
 import 'package:black_hole/widget/tile/size_tile.dart';

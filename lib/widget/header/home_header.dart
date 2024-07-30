@@ -52,6 +52,7 @@ class _HomeHeaderState extends State<HomeHeader> {
           ),
           prefixIcon: Icon(Icons.search, color: AppColor.white),
         ),
+        AppUI.verticalGap()
       ],
     );
   }

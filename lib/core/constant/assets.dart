@@ -2,6 +2,7 @@ class AppAsset {
   const AppAsset._();
 
   static const appLogo = 'assets/images/appLogo.png';
+  static const appLogoWBg = 'assets/images/appLogo_bg.jpg';
   static const testPhoto = 'assets/images/tesPhoto.png';
   static const appBG = 'assets/images/bean_bg.png';
   static const productBG = 'assets/images/product_bg.png';

@@ -105,10 +105,10 @@ class _AppFormFieldState extends State<AppFormField> {
             borderSide: BorderSide(color: AppColor.selectedBorderColor, width: 1)
         ),
         prefixIcon: widget.prefixIcon,
-        contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: widget.isBigField ? 12 : 0).r,
+        contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: widget.isBigField ? 12 : 0).r,
         hintText: widget.hintText,
         hintStyle: AppTextStyle.smallButtonText.copyWith(color: AppColor.borderColor),
-        helperText: widget.helperText ?? "",
+        helperText: widget.helperText,
         suffixIcon: widget.obscureText
             ? IconButton(
           onPressed: () {
