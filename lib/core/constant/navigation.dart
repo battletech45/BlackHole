@@ -7,6 +7,7 @@ import 'package:black_hole/screen/favorite_screen/favorite_screen.dart';
 import 'package:black_hole/screen/home_screen/home_screen.dart';
 import 'package:black_hole/screen/landing_screen/landing_screen.dart';
 import 'package:black_hole/screen/product_screen/product_detail_screen.dart';
+import 'package:black_hole/screen/qr_screen/qr_reader_screen.dart';
 import 'package:black_hole/screen/qr_screen/qr_screen.dart';
 import 'package:black_hole/widget/base/scaffold.dart';
 import 'package:black_hole/widget/loading/loading.dart';
@@ -74,7 +75,7 @@ class AppRouterConfig {
           path: '/qr',
           parentNavigatorKey: rootKey,
           name: 'QR sayfası',
-          builder: (context, state) => QrScreen()
+          builder: (context, state) => QrReaderScreen()
         ),
         StatefulShellRoute.indexedStack(
           parentNavigatorKey: rootKey,

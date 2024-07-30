@@ -3,7 +3,6 @@ import 'package:black_hole/core/constant/ui_const.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 
-import '../../core/constant/assets.dart';
 
 class QrScreen extends StatefulWidget {
   @override
@@ -23,20 +22,18 @@ class _QrScreenState extends State<QrScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Container(
-        color: AppColor.white,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: AppUI.pageFullSidePadding / 2,
-              child: PrettyQrView(
-                qrImage: qrImage,
-                decoration: const PrettyQrDecoration(),
-              ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            color: AppColor.white,
+            padding: AppUI.pageFullSidePadding / 2,
+            child: PrettyQrView(
+              qrImage: qrImage,
+              decoration: const PrettyQrDecoration(),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
