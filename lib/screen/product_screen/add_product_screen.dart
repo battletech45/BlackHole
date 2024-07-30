@@ -161,7 +161,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                               keyboardType: TextInputType.text,
                               validator: AppValidator.emptyValidator,
                               autofillHints: const [AutofillHints.name],
-                              textInputAction: TextInputAction.next
+                              textInputAction: TextInputAction.next,
                           ),
                         ),
                         GestureDetector(
@@ -170,7 +170,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                 ingredientsController.remove(ingredientsController.elementAt(index));
                               });
                             },
-                            child: Icon(Icons.delete, color: AppColor.red, size: 35.r)
+                            child: Icon(Icons.delete, color: AppColor.red, size: 30.r)
                         )
                       ],
                     ),
@@ -234,7 +234,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                 sizesController.remove(sizesController.elementAt(index));
                               });
                             },
-                            child: Icon(Icons.delete, color: AppColor.red, size: 35.r)
+                            child: Icon(Icons.delete, color: AppColor.red, size: 30.r)
                         )
                       ],
                     ),
@@ -242,7 +242,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 },
               ),
               AppUI.verticalGap(),
-              Image.asset(imageFile != null ? imageFile!.path : AppAsset.appLogo, width: 300.w, height: 300.h, fit: BoxFit.cover),
+              Image.asset(imageFile != null ? imageFile!.path : AppAsset.appLogo, width: 250.w, height: 250.h, fit: BoxFit.cover),
               AppUI.verticalGap(),
               SizedBox(
                 height: 50.h,

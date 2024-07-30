@@ -2,6 +2,7 @@ import 'package:black_hole/core/constant/assets.dart';
 import 'package:black_hole/core/service/log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -46,7 +47,7 @@ class _LandingScreenState extends State<LandingScreen> with SingleTickerProvider
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Center(
-                child: Image.asset(AppAsset.appLogo),
+                child: Image.asset(AppAsset.appLogo, width: 200.w, height: 200.h, fit: BoxFit.cover),
               ),
               const LoadingWidget(color: AppColor.white, size: 50),
             ],
