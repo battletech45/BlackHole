@@ -44,7 +44,7 @@ Black Hole is a mobile application developed using Flutter, aiming to enhance th
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/battletech45/black-hole.git
+   git clone https://github.com/battletech45/BlackHole.git
    cd black-hole
    ```
 
