@@ -26,19 +26,19 @@ class _SizeTileState extends State<SizeTile> {
   }
   
   void changeSize() {
-    if(widget.size == 'short') {
+    if(widget.size.trim().toLowerCase() == 'küçük') {
       iconSize = 25;
-      selectedSize = 'Short';
+      selectedSize = 'Küçük';
       selectedQuantity = '8 fl OZ';
     }
-    else if(widget.size == 'tall') {
+    else if(widget.size.trim().toLowerCase() == 'orta') {
       iconSize = 30;
-      selectedSize = 'Tall';
+      selectedSize = 'Orta';
       selectedQuantity = '12 fl OZ';
     }
-    else if(widget.size == 'grande') {
+    else if(widget.size.trim().toLowerCase() == 'büyük') {
       iconSize = 35;
-      selectedSize = 'Grande';
+      selectedSize = 'Büyük';
       selectedQuantity = '16 fl OZ';
     }
     else {

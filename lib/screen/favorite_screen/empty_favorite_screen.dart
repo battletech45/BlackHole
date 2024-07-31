@@ -9,7 +9,7 @@ import '../../core/constant/text_style.dart';
 import '../../core/constant/ui_const.dart';
 import '../../widget/button/loading_button.dart';
 
-class EmptyFavoriteScreen extends StatelessWidget {
+class EmptyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(

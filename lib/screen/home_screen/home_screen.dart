@@ -1,13 +1,13 @@
-import 'package:black_hole/core/constant/assets.dart';
 import 'package:black_hole/core/constant/ui_const.dart';
 import 'package:black_hole/widget/card/product_card.dart';
 import 'package:black_hole/widget/header/home_header.dart';
-import 'package:black_hole/widget/slider/home_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 import '../../core/model/menu.dart';
+import '../../core/service/provider/product.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,18 +16,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMixin {
-
-  final data = [
-    MenuItemModel(title: 'Cappuccino', extra: 'extra', imageURL: AppAsset.testPhoto, description: 'description', ingredients: ['test', 'test'], sizes: ['short', 'tall', 'grande', 'venti'], price: '200'),
-    MenuItemModel(title: 'mest', extra: 'extra', imageURL: AppAsset.productTest, description: 'description', ingredients: ['test', 'test'], sizes: ['short', 'tall', 'grande'], price: '200'),
-    MenuItemModel(title: 'sest', extra: 'extra', imageURL: AppAsset.testPhoto, description: 'description', ingredients: ['test', 'test'], sizes: ['short', 'tall'], price: '200'),
-    MenuItemModel(title: 'sest', extra: 'extra', imageURL: AppAsset.testPhoto, description: 'description', ingredients: ['test', 'test'], sizes: ['short', 'tall'], price: '200'),
-    MenuItemModel(title: 'sest', extra: 'extra', imageURL: AppAsset.testPhoto, description: 'description', ingredients: ['test', 'test'], sizes: ['short', 'tall'], price: '200'),
-    MenuItemModel(title: 'sest', extra: 'extra', imageURL: AppAsset.testPhoto, description: 'description', ingredients: ['test', 'test'], sizes: ['short', 'tall'], price: '200'),
-  ];
+  MenuModel? menuFuture;
   
   @override
   bool get wantKeepAlive => true;
+
+  @override
+  void initState() {
+    super.initState();
+    menuFuture = context.read<ProductProvider>().totalMenu;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,25 +37,34 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
           child: Column(
             children: <Widget>[
               HomeHeader(),
-              HomeCategorySlider(data: data),
+              //HomeCategorySlider(data: data),
               AppUI.verticalBlankSpace,
               GridView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 15.h,
-                    crossAxisSpacing: 15.w,
-                    childAspectRatio: 0.75
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 15.h,
+                      crossAxisSpacing: 15.w,
+                      childAspectRatio: 0.75
                   ),
                   shrinkWrap: true,
-                  itemCount: data.length,
+                  itemCount: menuFuture?.items.length ?? 0,
                   itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        context.push('/product_detail', extra: data[index]);
-                      },
-                        child: ProductCard(imageURL: data[index].imageURL, title: data[index].title, price: data[index].price, extra: data[index].extra, isFavorited: false)
-                    );
+                    if(menuFuture != null) {
+                      bool comparison = false;
+                      if(context.watch<ProductProvider>().favoriteProducts != null && context.watch<ProductProvider>().favoriteProducts!.items.isNotEmpty) {
+                        comparison = (context.watch<ProductProvider>().favoriteProducts?.items[index].id == menuFuture!.items[index].id);
+                      }
+                      return GestureDetector(
+                          onTap: () {
+                            context.push('/product_detail', extra: menuFuture!.items[index]);
+                          },
+                          child: ProductCard(imageURL: menuFuture!.items[index].imageURL, title: menuFuture!.items[index].title, price: menuFuture!.items[index].prices[0], extra: menuFuture!.items[index].extra, isFavorited: comparison)
+                      );
+                    }
+                    else {
+                      return const SizedBox.shrink();
+                    }
                   }
               ),
               AppUI.verticalGap()

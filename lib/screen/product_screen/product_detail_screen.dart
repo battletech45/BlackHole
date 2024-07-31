@@ -2,6 +2,7 @@ import 'package:black_hole/core/constant/colors.dart';
 import 'package:black_hole/core/constant/text_style.dart';
 import 'package:black_hole/core/constant/ui_const.dart';
 import 'package:black_hole/core/model/menu.dart';
+import 'package:black_hole/core/service/provider/product.dart';
 import 'package:black_hole/widget/base/scaffold.dart';
 import 'package:black_hole/widget/card/product_title_card.dart';
 import 'package:black_hole/widget/header/product_header.dart';
@@ -11,6 +12,7 @@ import 'package:black_hole/widget/tile/size_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final MenuItemModel model;
@@ -22,7 +24,16 @@ class ProductDetailScreen extends StatefulWidget {
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
-  String selectedSize = 'short';
+  String selectedSize = '';
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      selectedSize = widget.model.sizes[0];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
@@ -32,7 +43,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            ProductHeader(imageURL: widget.model.imageURL, title: widget.model.title),
+            ProductHeader(imageURL: widget.model.imageURL, title: widget.model.title, productID: widget.model.id, isFavorited: context.watch<ProductProvider>().favoriteProducts?.items.any((item) => item.id == widget.model.id) ?? false),
             AppUI.verticalGap(),
             ProductTitleCard(title: widget.model.title, extra: widget.model.extra),
             AppUI.verticalGap(),
@@ -44,7 +55,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 children: <Widget>[
                   Text('Description', style: AppTextStyle.productTitle),
                   AppUI.verticalGap(0.3),
-                  Text('A cappuaccino is a coffee - based brink made primarily form espresso and milk.'),
+                  Text('${widget.model.description}'),
                   AppUI.verticalGap(),
                   Text('Ingredients', style: AppTextStyle.productTitle),
                   AppUI.verticalGap(0.3),
@@ -71,6 +82,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         scrollDirection: Axis.horizontal,
                         itemCount: widget.model.sizes.length,
                         itemBuilder: (context, index) {
+                          widget.model.sizes.sort();
                           return GestureDetector(
                               onTap: () {
                                 setState(() {
@@ -83,7 +95,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     ),
                   ),
                   AppUI.verticalGap(),
-                  PriceTile(price: widget.model.price),
+                  PriceTile(price: widget.model.prices.elementAt(widget.model.sizes.indexOf(selectedSize))),
                 ],
               ),
             )

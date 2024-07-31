@@ -35,21 +35,26 @@ class ProductCard extends StatelessWidget {
                 children: <Widget>[
                   ClipRRect(
                       borderRadius: BorderRadius.circular(25.r),
-                      child: Image.asset(imageURL, width: 110.w, height: 110.h, fit: BoxFit.cover)
+                      child: CachedNetworkImage(imageUrl: imageURL, width: 110.w, height: 110.h, fit: BoxFit.cover)
                   ),
-                  Container(
-                    padding: AppUI.pageFullSidePadding / 3,
-                    decoration: BoxDecoration(
-                      color: AppColor.iconColor.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(10.r)
-                    ),
-                    child: isFavorited ? Icon(Icons.favorite, color: AppColor.buttonBG) : Icon(Icons.favorite_border, color: AppColor.white),
-                  )
                 ]
               ),
             ),
             AppUI.verticalGap(0.5),
-            Text(title, style: AppTextStyle.bigButtonText),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(title, style: AppTextStyle.bigButtonText),
+                Container(
+                  padding: AppUI.pageFullSidePadding / 3,
+                  decoration: BoxDecoration(
+                      color: AppColor.iconColor.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(10.r)
+                  ),
+                  child: isFavorited ? Icon(Icons.favorite, color: AppColor.buttonBG) : Icon(Icons.favorite_border, color: AppColor.white),
+                )
+              ],
+            ),
             AppUI.verticalGap(0.2),
             Visibility(
               visible: extra != null,

@@ -1,4 +1,5 @@
 import 'package:black_hole/core/constant/ui_const.dart';
+import 'package:black_hole/core/service/provider/product.dart';
 import 'package:black_hole/core/service/provider/theme.dart';
 import 'package:black_hole/firebase_options.dart';
 import 'package:black_hole/screen/landing_screen/landing_screen.dart';
@@ -14,6 +15,7 @@ import 'core/constant/navigation.dart';
 import 'core/service/provider/auth.dart';
 
 late AutherProvider autherProvider;
+late ProductProvider productProvider;
 late String themeStr;
 
 void main() async {
@@ -34,6 +36,7 @@ class BlackHoleApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: autherProvider),
+        ChangeNotifierProvider.value(value: productProvider),
         ChangeNotifierProvider(create: (context) => ThemeProvider(themeString: themeStr))
       ],
       builder: (context, __) {
@@ -62,7 +65,11 @@ class BlackHoleApp extends StatelessWidget {
 
 Future<void> providerInit() async {
   autherProvider = AutherProvider();
+  productProvider = ProductProvider();
   await autherProvider.init();
+  if(autherProvider.isAuth) {
+    productProvider.init(autherProvider.user);
+  }
   themeStr = await checkSharedForTheme();
 }
 

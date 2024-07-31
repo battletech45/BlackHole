@@ -22,6 +22,7 @@ class FirebaseService {
       'phoneNumber': phoneNumber,
       'createdAt': DateTime.now(),
       'updatedAt': DateTime.now(),
+      'favorites': [],
       'points': 0,
       'isAdmin': false
     });
@@ -37,6 +38,7 @@ class FirebaseService {
         'sizes': sizes,
         'prices': prices
       });
+      await menuCollection.doc(newProductRef.id).update({'id': newProductRef.id});
       return newProductRef.id;
     }
     catch(e) {
@@ -55,6 +57,7 @@ class FirebaseService {
         LoggerService.logInfo('Image file uploaded.')
       });
       String downloadUrl = await storageRef.getDownloadURL();
+      print('FOTOGRAF LINKI $downloadUrl');
       await menuCollection.doc(productID).update({
         'imageURL': downloadUrl
       });
@@ -79,18 +82,83 @@ class FirebaseService {
     }
   }
 
-  static Future<QuerySnapshot> getItems() async {
-    return await menuCollection.get();
+  static Future<bool> toggleProductFavorite(String userID, String productID) async {
+    try {
+      DocumentSnapshot userSnapshot = await userCollection.doc(userID).get();
+      List<dynamic> favorites = await userSnapshot.get('favorites');
+
+      if(favorites.contains(productID)) {
+        await userCollection.doc(userID).update({
+          'favorites': FieldValue.arrayRemove([productID])
+        });
+      }
+      else {
+        await userCollection.doc(userID).update({
+          'favorites': FieldValue.arrayUnion([productID])
+        });
+      }
+      return true;
+    }
+    catch(e) {
+      LoggerService.logError(e.toString());
+      rethrow;
+    }
+  }
+
+  static Future<MenuModel?> getItems() async {
+    try {
+      QuerySnapshot querySnapshot = await menuCollection.get();
+      return MenuModel.fromDocument(querySnapshot.docs);
+    }
+    catch(e) {
+      LoggerService.logError(e.toString());
+      rethrow;
+    }
+  }
+
+  static Future<DocumentSnapshot?> getUserData(String userID) async {
+    try {
+      return await userCollection.doc(userID).get();
+    }
+    catch(e) {
+      LoggerService.logError(e.toString());
+      rethrow;
+    }
+  }
+
+  static Future<MenuModel?> getUserFavorites(String userID) async {
+    try {
+      DocumentSnapshot userDoc = await userCollection.doc(userID).get();
+      List<DocumentSnapshot> favData = [];
+      final List<dynamic> favItemIDs = userDoc.get('favorites');
+
+      final tempData = await menuCollection.get();
+      favItemIDs.forEach((element) {
+        tempData.docs.forEach((doc) {
+          if(doc.id == element) {
+            favData.add(doc);
+          }
+        });
+      });
+
+      MenuModel model = MenuModel.fromDocument(favData);
+      return model;
+    }
+    catch(e) {
+      LoggerService.logError(e.toString());
+      rethrow;
+    }
   }
 
   static Future<bool> getIsUserAdmin(String userID) async {
-    final userDoc = await userCollection.doc(userID).get();
-    return userDoc['isAdmin'];
-  }
-
-  static Future<List<MenuItemModel>?> getCategories() async {
-    QuerySnapshot snapshot = await categoryCollection.get();
-    return snapshot.docs.map((doc) => MenuItemModel.fromDocument(doc)).toList();
+    try {
+      final userDoc = await userCollection.doc(userID).get();
+      return userDoc['isAdmin'];
+    }
+    catch(e) {
+      LoggerService.logError(e.toString());
+      return false;
+    }
   }
 
   static Future<bool> getFreeProduct(String userID) async {
