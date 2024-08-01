@@ -47,6 +47,7 @@ class AppUI {
   static EdgeInsets pageVerticalPadding = EdgeInsets.symmetric(vertical: paddingValue).r;
   static EdgeInsets pageFullSidePadding = const EdgeInsets.all(paddingValue).r;
   static EdgeInsets inputTopMargin = const EdgeInsets.only(top: 5).r;
+  static EdgeInsets onboardBottomPadding = const EdgeInsets.only(left: paddingValue / 2, right: paddingValue / 2, bottom: paddingValue / 2).r;
   static EdgeInsets pageScrollPadding(BuildContext context) => EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom + paddingValue).r;
 
   static EdgeInsets pageFullPadding(BuildContext context) =>

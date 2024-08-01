@@ -1,9 +1,11 @@
 import 'package:black_hole/core/constant/assets.dart';
 import 'package:black_hole/core/service/log.dart';
+import 'package:black_hole/core/service/provider/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 import '../../core/constant/colors.dart';
 import '../../core/service/device_service.dart';
@@ -23,7 +25,15 @@ class _LandingScreenState extends State<LandingScreen> with SingleTickerProvider
     super.initState();
     try {
       SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((value) {
-        context.go('/');
+        Future.delayed(Duration(seconds: 1), () {
+          bool selectPath = context.read<AutherProvider>().showOnboard;
+          if(selectPath) {
+            context.go('/onboard');
+          }
+          else {
+            context.go('/');
+          }
+        });
       });
     }
     catch(e) {

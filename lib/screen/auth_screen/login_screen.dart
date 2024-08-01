@@ -80,6 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: SvgPicture.asset(AppAsset.messageIcon),
                 ),
               ),
+              AppUI.verticalGap(2),
               AppFormField(
                 hintText: 'Password',
                 controller: passwordController,

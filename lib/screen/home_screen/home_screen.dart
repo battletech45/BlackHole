@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/model/menu.dart';
+import '../../core/service/firebase.dart';
 import '../../core/service/provider/product.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -24,7 +25,14 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
   @override
   void initState() {
     super.initState();
-    menuFuture = context.read<ProductProvider>().totalMenu;
+    getMenuItems();
+  }
+
+  Future<void> getMenuItems() async {
+    final data = await FirebaseService.getItems();
+    setState(() {
+      menuFuture = data;
+    });
   }
 
   @override

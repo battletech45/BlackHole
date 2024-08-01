@@ -22,4 +22,8 @@ class AppAsset {
   static const googleIcon = 'assets/icons/auth/google_logo.png';
 
   static const emptyFavLottie = 'assets/lottie/empty_favorite.json';
+
+  static const firstOnboard = 'assets/images/onboard/first_onboarding.png';
+  static const secondOnboard = 'assets/images/onboard/second_onboarding.png';
+  static const thirdOnboard = 'assets/images/onboard/third_onboarding.png';
 }

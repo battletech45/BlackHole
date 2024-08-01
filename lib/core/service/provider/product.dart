@@ -10,16 +10,9 @@ class ProductProvider extends ChangeNotifier {
   MenuModel? totalMenu;
 
   Future<void> init(User? user) async {
-    await getMenuItems();
     if(user != null) {
       await syncFavoritesFromFirebase(user.uid);
     }
-  }
-
-  Future<void> getMenuItems() async {
-    final res = await FirebaseService.getItems();
-    totalMenu = res;
-    notifyListeners();
   }
 
   Future<void> syncFavoritesFromFirebase(String userID) async {

@@ -82,11 +82,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   child: SvgPicture.asset(AppAsset.nameChangeIcon),
                 ),
               ),
+              AppUI.verticalGap(),
               PhoneField(
                 onChanged: (value) {
                   phoneNumber = value;
                 },
               ),
+              AppUI.verticalGap(),
               AppFormField(
                 hintText: 'Email',
                 controller: emailController,
@@ -99,6 +101,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   child: SvgPicture.asset(AppAsset.messageIcon),
                 ),
               ),
+              AppUI.verticalGap(),
               AppFormField(
                 hintText: 'Password',
                 controller: passwordController,
@@ -112,6 +115,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   child: SvgPicture.asset(AppAsset.lockIcon),
                 ),
               ),
+              AppUI.verticalGap(2),
               SizedBox(
                 height: 55.h,
                 width: 250.w,

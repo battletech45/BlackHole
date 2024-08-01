@@ -25,7 +25,8 @@ class AppBottomNavBar extends StatelessWidget {
       iconSize: DeviceService.isTablet ? 24 : 21.sp,
       items: [
         BottomNavigationBarItem(icon: SvgPicture.asset(AppAsset.homeIcon), label: 'Ana Menü'),
-        BottomNavigationBarItem(icon: SvgPicture.asset(AppAsset.bagIcon), label: 'Sepet'),
+        BottomNavigationBarItem(icon: SvgPicture.asset(AppAsset.nameChangeIcon), label: 'Haberler'),
+        //BottomNavigationBarItem(icon: SvgPicture.asset(AppAsset.bagIcon), label: 'Sepet'),
         BottomNavigationBarItem(icon: SvgPicture.asset(AppAsset.heartIcon), label: 'Favoriler'),
         BottomNavigationBarItem(icon: SvgPicture.asset(AppAsset.notificationIcon), label: 'Hesabım'),
       ],

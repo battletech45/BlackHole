@@ -1,11 +1,14 @@
+import 'package:black_hole/core/model/campaign.dart';
 import 'package:black_hole/core/model/menu.dart';
 import 'package:black_hole/screen/auth_screen/login_screen.dart';
 import 'package:black_hole/screen/auth_screen/profile_screen.dart';
 import 'package:black_hole/screen/auth_screen/register_screen.dart';
-import 'package:black_hole/screen/cart_screen/cart_screen.dart';
+import 'package:black_hole/screen/campaign_screen/add_campaign_screen.dart';
+import 'package:black_hole/screen/campaign_screen/campaign_detail_screen.dart';
 import 'package:black_hole/screen/favorite_screen/favorite_screen.dart';
 import 'package:black_hole/screen/home_screen/home_screen.dart';
 import 'package:black_hole/screen/landing_screen/landing_screen.dart';
+import 'package:black_hole/screen/onboarding_screen/onboarding_screen.dart';
 import 'package:black_hole/screen/product_screen/product_detail_screen.dart';
 import 'package:black_hole/screen/qr_screen/free_product_screen.dart';
 import 'package:black_hole/screen/qr_screen/qr_reader_screen.dart';
@@ -14,9 +17,9 @@ import 'package:black_hole/widget/base/scaffold.dart';
 import 'package:black_hole/widget/loading/loading.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../screen/campaign_screen/campaign_screen.dart';
 import '../../screen/product_screen/add_product_screen.dart';
 import '../../widget/base/bottom_navbar.dart';
 import 'colors.dart';
@@ -49,6 +52,12 @@ class AppRouterConfig {
       ),
       observers: [firebaseObserver],
       routes: [
+        GoRoute(
+          path: '/onboard',
+          parentNavigatorKey: rootKey,
+          name: 'Tanıtım Sayfası',
+          builder: (context, state) => const OnboardingScreen()
+        ),
         GoRoute(
           path: '/landing_screen',
           parentNavigatorKey: rootKey,
@@ -100,6 +109,12 @@ class AppRouterConfig {
           name: 'Ürün Giriş Sayfası',
           builder: (context, state) => const AddProductScreen()
         ),
+        GoRoute(
+          path: '/addNews',
+          parentNavigatorKey: rootKey,
+          name: 'Haber Giriş Sayfası',
+          builder: (context, state) => const AddCampaignScreen()
+        ),
         // --------------------------------
         //          ADMİN ROUTES END
         // --------------------------------
@@ -134,10 +149,17 @@ class AppRouterConfig {
             StatefulShellBranch(
                 routes: [
                   GoRoute(
-                    path: '/cart',
-                    name: 'Sepet Sayfası',
-                    builder: (context, state) => const CartScreen()
-                  )
+                    path: '/campaign',
+                    name: 'Kampanya Sayfası',
+                    builder: (context, state) => const CampaignScreen(),
+                    routes: [
+                      GoRoute(
+                        path: ':id',
+                        name: 'Kampanya Detay Sayfası',
+                        builder: (context, state) => CampaignDetailScreen(model: state.extra as CampaignModel)
+                      ),
+                    ]
+                  ),
                 ]
             ),
             StatefulShellBranch(

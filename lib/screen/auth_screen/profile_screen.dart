@@ -120,7 +120,25 @@ class ProfileScreen extends StatelessWidget {
                         ),
                         child: NavigationTile(title: 'Ürün Ekle')
                     ),
-                    AppUI.verticalGap(2),
+                    AppUI.verticalGap(),
+                  ],
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  context.push('/addNews');
+                },
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      padding: AppUI.pageFullSidePadding,
+                      decoration: BoxDecoration(
+                        color: AppColor.cardBGDark,
+                        borderRadius: BorderRadius.circular(15.r)
+                      ),
+                      child: NavigationTile(title: 'Haber / Kampanya Ekle'),
+                    ),
+                    AppUI.verticalGap(2)
                   ],
                 ),
               ),

@@ -67,9 +67,7 @@ Future<void> providerInit() async {
   autherProvider = AutherProvider();
   productProvider = ProductProvider();
   await autherProvider.init();
-  if(autherProvider.isAuth) {
-    productProvider.init(autherProvider.user);
-  }
+  productProvider.init(autherProvider.user);
   themeStr = await checkSharedForTheme();
 }
 

@@ -54,8 +54,10 @@ class ProductHeader extends StatelessWidget {
                         icon: isFavorited ? Icons.favorite : Icons.favorite_border,
                         iconColor: AppColor.white, paddingScale: 2,
                         onTap: () async {
-                          await FirebaseService.toggleProductFavorite(context.read<AutherProvider>().user?.uid ?? '', productID);
-                          context.read<ProductProvider>().syncFavoritesFromFirebase(context.read<AutherProvider>().user?.uid ?? '');
+                          if(context.read<AutherProvider>().isAuth) {
+                            await FirebaseService.toggleProductFavorite(context.read<AutherProvider>().user?.uid ?? '', productID);
+                            context.read<ProductProvider>().syncFavoritesFromFirebase(context.read<AutherProvider>().user?.uid ?? '');
+                          }
                         }
                     ),
                   ],

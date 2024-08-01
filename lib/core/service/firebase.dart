@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:black_hole/core/service/log.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:logger/logger.dart';
 import '../model/menu.dart';
 
 class FirebaseService {
@@ -12,7 +13,7 @@ class FirebaseService {
   static final FirebaseService instance = FirebaseService._();
 
   static final CollectionReference menuCollection = FirebaseFirestore.instance.collection('menu');
-  static final CollectionReference categoryCollection = FirebaseFirestore.instance.collection('categories');
+  static final CollectionReference newsCollection = FirebaseFirestore.instance.collection('news');
   static final CollectionReference userCollection = FirebaseFirestore.instance.collection('users');
 
   static Future<void> createUser(String userID, String fullName, String email, String phoneNumber) async {
@@ -26,6 +27,24 @@ class FirebaseService {
       'points': 0,
       'isAdmin': false
     });
+  }
+
+  static Future<String?> createNewsItem(String title, String content, String date) async {
+    try {
+      DocumentReference newsRef = await newsCollection.add({
+        'title': title,
+        'content': content,
+        'date': date
+      });
+      await newsCollection.doc(newsRef.id).update({
+        'id': newsRef.id
+      });
+      return newsRef.id;
+    }
+    catch(e) {
+      LoggerService.logError(e.toString());
+      rethrow;
+    }
   }
 
   static Future<String?> createMenuItem(String title, String? extra, String description, List<String> ingredients, List<String> sizes, List<String> prices) async {
@@ -47,6 +66,27 @@ class FirebaseService {
     }
   }
 
+  static Future<bool> uplaodNewsImageToFirebase(String newsID, File imageFile) async {
+    try {
+      String fileName = 'news/${newsID}';
+      Reference storageRef = FirebaseStorage.instance.ref().child(fileName);
+
+      UploadTask uploadTask = storageRef.putFile(imageFile);
+      await uploadTask.whenComplete(() => {
+        LoggerService.logInfo('Image file uploaded.')
+      });
+      String downloadUrl = await storageRef.getDownloadURL();
+      await newsCollection.doc(newsID).update({
+        'imageURL': downloadUrl
+      });
+      return true;
+    }
+    catch(e) {
+      LoggerService.logError(e.toString());
+      rethrow;
+    }
+  }
+
   static Future<bool> uploadImageToFirebase(String productID, File imageFile) async {
     try {
       String fileName = 'productImages/${productID}';
@@ -59,7 +99,7 @@ class FirebaseService {
       String downloadUrl = await storageRef.getDownloadURL();
       print('FOTOGRAF LINKI $downloadUrl');
       await menuCollection.doc(productID).update({
-        'imageURL': downloadUrl
+        'imageUrl': downloadUrl
       });
       return true;
     }
@@ -115,6 +155,17 @@ class FirebaseService {
       rethrow;
     }
   }
+
+  static Future<List<DocumentSnapshot>?> getNews() async {
+    try {
+      QuerySnapshot querySnapshot = await newsCollection.get();
+      return querySnapshot.docs;
+  }
+  catch(e) {
+      LoggerService.logError(e.toString());
+      rethrow;
+  }
+}
 
   static Future<DocumentSnapshot?> getUserData(String userID) async {
     try {

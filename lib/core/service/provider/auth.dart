@@ -10,11 +10,15 @@ import '../../model/login.dart';
 class AutherProvider with ChangeNotifier {
   User? user;
   LoginModel? loginModel;
+  bool isAdmin = false;
+  bool _showOnboard = true;
+
   final _loginKey = 'login';
   final _googleKey = 'google';
-  bool isAdmin = false;
+  final _onboardKey = 'onboard';
 
   bool get isAuth => user != null;
+  bool get showOnboard => _showOnboard;
 
   Future<void> init() async {
     loginModel = await _readShared();
@@ -34,6 +38,18 @@ class AutherProvider with ChangeNotifier {
   Future<LoginModel?> _readShared() async {
     LoggerService.logInfo('Starting to read Shared');
     final pref = await SharedPreferences.getInstance();
+    //Start onboard preference read
+    if(pref.containsKey(_onboardKey)) {
+      final tmpBool = pref.getBool(_onboardKey);
+      LoggerService.logInfo('$_onboardKey key exists. tmpBool: $tmpBool');
+      if(tmpBool != null) {
+        _showOnboard = tmpBool;
+      }
+    }
+    else {
+      LoggerService.logInfo('Reading completed. No OnboardData in Shared');
+    }
+    //End onboard preference read
     if (pref.containsKey(_loginKey)) {
       final tmpJson = pref.getString(_loginKey);
       LoggerService.logInfo('$_loginKey key exists. jsonString: $tmpJson');
@@ -57,6 +73,16 @@ class AutherProvider with ChangeNotifier {
     LoggerService.logInfo('Writing completed. success: $b');
     notifyListeners();
     return b;
+  }
+
+  Future<bool> writeOnboardShared(bool data) async {
+    LoggerService.logInfo('Starting to write Shared $data');
+    final pref = await SharedPreferences.getInstance();
+    LoggerService.logInfo('writing Shared...');
+    bool s = await pref.setBool(_onboardKey, data);
+    LoggerService.logInfo('Writing completed. success: $s');
+    notifyListeners();
+    return s;
   }
 
   Future<User?> signInWithEmailAndPassWord(String email, String password) async {

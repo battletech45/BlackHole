@@ -41,7 +41,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       backgroundColor: AppColor.black,
       child: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             ProductHeader(imageURL: widget.model.imageURL, title: widget.model.title, productID: widget.model.id, isFavorited: context.watch<ProductProvider>().favoriteProducts?.items.any((item) => item.id == widget.model.id) ?? false),
             AppUI.verticalGap(),
