@@ -58,7 +58,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDAOdrKBfhqJLK037rk2Q5TLIX6SbAhN7g',
-    appId: '1:207119378431:android:0538fec751beb8651929ca',
+    appId: '1:207119378431:android:498513005f0d0b611929ca',
     messagingSenderId: '207119378431',
     projectId: 'blackholecafe-d6622',
     storageBucket: 'blackholecafe-d6622.appspot.com',
@@ -66,12 +66,13 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCSs6xd2ixI4CNAtm51ZdQBwTlSCzwdSNU',
-    appId: '1:207119378431:ios:abf1a00e3d843cf91929ca',
+    appId: '1:207119378431:ios:328bf403411ad47d1929ca',
     messagingSenderId: '207119378431',
     projectId: 'blackholecafe-d6622',
     storageBucket: 'blackholecafe-d6622.appspot.com',
     androidClientId: '207119378431-n5uga18vtgon6hnd4h8c3bdmgc2027g1.apps.googleusercontent.com',
-    iosClientId: '207119378431-5qmru5slr5chh969aq859tl5qrnj5cpo.apps.googleusercontent.com',
-    iosBundleId: 'com.example.blackHole',
+    iosClientId: '207119378431-ofnmat5mi79q8gm6ipmqrermfknearho.apps.googleusercontent.com',
+    iosBundleId: 'com.coffeecoddie.blackhole',
   );
+
 }

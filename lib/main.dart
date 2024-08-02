@@ -1,104 +1,82 @@
-import 'package:black_hole/LoginPage.dart';
+import 'package:black_hole/core/constant/ui_const.dart';
+import 'package:black_hole/core/service/provider/product.dart';
+import 'package:black_hole/core/service/provider/theme.dart';
 import 'package:black_hole/firebase_options.dart';
-import 'package:black_hole/src/helperFunctions.dart';
-import 'package:flutter/material.dart';
+import 'package:black_hole/screen/landing_screen/landing_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:slider_button/slider_button.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import 'CenteralPage.dart';
+import 'core/constant/navigation.dart';
+import 'core/service/provider/auth.dart';
+
+late AutherProvider autherProvider;
+late ProductProvider productProvider;
+late String themeStr;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform
-  );
-  runApp(MyApp());
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge, overlays: [SystemUiOverlay.top]);
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(systemNavigationBarColor: Colors.transparent));
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  await providerInit();
+  await Future.delayed(const Duration(seconds: 1));
+  runApp(BlackHoleApp());
 }
 
-class sliderButton extends StatefulWidget {
-
-  @override
-  State<sliderButton> createState() => _sliderButtonState();
-}
-
-class _sliderButtonState extends State<sliderButton> {
-
-  bool isLoggedIn = false;
-  bool isAdmin = false;
-
-  _checkUserStatus() async {
-    var savedLoggedIn = await helperFunctions.getUserLoggedInSharedPreference();
-    print(isLoggedIn);
-    if(savedLoggedIn != null){
-      setState(() {
-        isLoggedIn = savedLoggedIn;
-      });
-    }
-    print(isLoggedIn);
-    var savedEmail = await helperFunctions.getUserEmailSharedPreference();
-    if(savedEmail == "taneri862@gmail.com") {
-      setState(() {
-        isAdmin = true;
-      });
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _checkUserStatus();
-  }
-
+class BlackHoleApp extends StatelessWidget {
+  const BlackHoleApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return SliderButton(
-      label: Text('SLIDE TO UNLOCK !', style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold, fontStyle: FontStyle.italic)),
-      action: () {
-        if(isLoggedIn) {
-          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => CentralPage()));
-        }
-        else {
-          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => SignInPage()));
-        }
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider.value(value: autherProvider),
+        ChangeNotifierProvider.value(value: productProvider),
+        ChangeNotifierProvider(create: (context) => ThemeProvider(themeString: themeStr))
+      ],
+      builder: (context, __) {
+        return ScreenUtilInit(
+          designSize: const Size(375, 812),
+          builder: (context, __) {
+            context.read<ThemeProvider>().init(context);
+            return MaterialApp.router(
+              routerConfig: AppRouterConfig.router,
+              debugShowCheckedModeBanner: false,
+              scrollBehavior: const CupertinoScrollBehavior(),
+              theme: context.watch<ThemeProvider>().selected,
+              builder: (context, child) {
+                return MediaQuery(
+                    data: MediaQuery.of(context).copyWith(textScaler: TextScaler.noScaling),
+                    child: child!,
+                );
+              },
+            );
+          },
+        );
       },
-      icon: Center(
-        child: Icon(Icons.coffee),
-      ),
-      backgroundColor: Colors.brown[800],
-      buttonColor: Colors.brown[500],
-      buttonSize: 60.0,
-      width: 250.0,
-      radius: 25.0,
-      height: 60.0,
     );
   }
 }
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
+Future<void> providerInit() async {
+  autherProvider = AutherProvider();
+  productProvider = ProductProvider();
+  await autherProvider.init();
+  productProvider.init(autherProvider.user);
+  themeStr = await checkSharedForTheme();
 }
 
-class _MyAppState extends State<MyApp> {
+Future<String> checkSharedForTheme() async {
+  final shared = await SharedPreferences.getInstance();
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: Colors.black,
-        body: Container(
-          alignment: Alignment.center,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Image.asset('assets/BH_AccretionDisk_Sim_Stationary_WebSize.gif'),
-              SizedBox(height: 100.0),
-              sliderButton()
-            ],
-          ),
-        ),
-      ),
-    );
+  if (shared.containsKey('theme')) {
+    return shared.getString('theme')!;
+  } else {
+    return 'platform';
   }
 }

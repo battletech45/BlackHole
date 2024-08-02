@@ -7,20 +7,12 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:207119378431:android:0538fec751beb8651929ca",
+        "mobilesdk_app_id": "1:207119378431:android:926a73ff5675182e1929ca",
         "android_client_info": {
-          "package_name": "com.example.black_hole"
+          "package_name": "com.coffecodie.blackhole"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "207119378431-n5uga18vtgon6hnd4h8c3bdmgc2027g1.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.black_hole",
-            "certificate_hash": "a7f90d62abd453499637733f0fe261fb9c4a9a11"
-          }
-        },
         {
           "client_id": "207119378431-hkrldsphir2oj573dm55c50j06l8kg2p.apps.googleusercontent.com",
           "client_type": 3
@@ -37,6 +29,49 @@
             {
               "client_id": "207119378431-hkrldsphir2oj573dm55c50j06l8kg2p.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "207119378431-5qmru5slr5chh969aq859tl5qrnj5cpo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.blackHole"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:207119378431:android:498513005f0d0b611929ca",
+        "android_client_info": {
+          "package_name": "com.coffeecoddie.blackhole"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "207119378431-hkrldsphir2oj573dm55c50j06l8kg2p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAOdrKBfhqJLK037rk2Q5TLIX6SbAhN7g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "207119378431-hkrldsphir2oj573dm55c50j06l8kg2p.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "207119378431-5qmru5slr5chh969aq859tl5qrnj5cpo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.blackHole"
+              }
             }
           ]
         }
