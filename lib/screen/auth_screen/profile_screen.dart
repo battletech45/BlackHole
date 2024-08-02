@@ -1,19 +1,50 @@
 import 'package:black_hole/core/constant/assets.dart';
 import 'package:black_hole/core/constant/text_style.dart';
 import 'package:black_hole/core/constant/ui_const.dart';
+import 'package:black_hole/core/service/firebase.dart';
+import 'package:black_hole/core/service/log.dart';
 import 'package:black_hole/core/service/provider/auth.dart';
 import 'package:black_hole/screen/auth_screen/guest_profile_screen.dart';
 import 'package:black_hole/widget/tile/navigation_tile.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/constant/colors.dart';
+import '../../widget/card/profile_card.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  DocumentSnapshot? userDoc;
+
+  Future<void> getData() async {
+    try {
+      final retData = await FirebaseService.getUserData(context.read<AutherProvider>().user!.uid);
+      setState(() {
+        userDoc = retData;
+      });
+    }
+    catch(e) {
+      LoggerService.logError(e.toString());
+      rethrow;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -68,22 +99,34 @@ class ProfileScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  context.push('/qrRead');
-                },
+              Visibility(
+                visible: !context.watch<AutherProvider>().isAdmin,
                 child: Column(
-                  children: <Widget>[
-                    Container(
-                        padding: AppUI.pageFullSidePadding,
-                        decoration: BoxDecoration(
-                            color: AppColor.cardBGDark,
-                            borderRadius: BorderRadius.circular(15.r)
-                        ),
-                        child: NavigationTile(title: 'QR Okut')
-                    ),
-                    AppUI.verticalGap(),
+                  children: [
+                    ProfileCard(totalPoint: userDoc?['points'] ?? 0),
+                    AppUI.verticalGap()
                   ],
+                ),
+              ),
+              Visibility(
+                visible: context.watch<AutherProvider>().isAdmin,
+                child: GestureDetector(
+                  onTap: () {
+                    context.push('/qrRead');
+                  },
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                          padding: AppUI.pageFullSidePadding,
+                          decoration: BoxDecoration(
+                              color: AppColor.cardBGDark,
+                              borderRadius: BorderRadius.circular(15.r)
+                          ),
+                          child: NavigationTile(title: 'QR Okut')
+                      ),
+                      AppUI.verticalGap(),
+                    ],
+                  ),
                 ),
               ),
               Visibility(
@@ -107,40 +150,46 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  context.push('/addProduct');
-                },
-                child: Column(
-                  children: <Widget>[
-                    Container(
+              Visibility(
+                visible: context.watch<AutherProvider>().isAdmin,
+                child: GestureDetector(
+                  onTap: () {
+                    context.push('/addProduct');
+                  },
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                          padding: AppUI.pageFullSidePadding,
+                          decoration: BoxDecoration(
+                            color: AppColor.cardBGDark,
+                            borderRadius: BorderRadius.circular(15.r)
+                          ),
+                          child: NavigationTile(title: 'Ürün Ekle')
+                      ),
+                      AppUI.verticalGap(),
+                    ],
+                  ),
+                ),
+              ),
+              Visibility(
+                visible: context.watch<AutherProvider>().isAdmin,
+                child: GestureDetector(
+                  onTap: () {
+                    context.push('/addNews');
+                  },
+                  child: Column(
+                    children: <Widget>[
+                      Container(
                         padding: AppUI.pageFullSidePadding,
                         decoration: BoxDecoration(
                           color: AppColor.cardBGDark,
                           borderRadius: BorderRadius.circular(15.r)
                         ),
-                        child: NavigationTile(title: 'Ürün Ekle')
-                    ),
-                    AppUI.verticalGap(),
-                  ],
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  context.push('/addNews');
-                },
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      padding: AppUI.pageFullSidePadding,
-                      decoration: BoxDecoration(
-                        color: AppColor.cardBGDark,
-                        borderRadius: BorderRadius.circular(15.r)
+                        child: NavigationTile(title: 'Haber / Kampanya Ekle'),
                       ),
-                      child: NavigationTile(title: 'Haber / Kampanya Ekle'),
-                    ),
-                    AppUI.verticalGap(2)
-                  ],
+                      AppUI.verticalGap(2)
+                    ],
+                  ),
                 ),
               ),
               GestureDetector(
