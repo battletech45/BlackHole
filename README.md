@@ -1,7 +1,3 @@
-Sure, here's the updated README file with the backend details changed to Firebase:
-
----
-
 # Black Hole Coffee Shop Application
 
 Welcome to the Black Hole Coffee Shop Application! This project is designed to provide a seamless and enjoyable experience for coffee lovers to browse, and enjoy their favorite coffee beverages.
