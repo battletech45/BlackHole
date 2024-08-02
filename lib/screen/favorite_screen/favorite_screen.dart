@@ -12,7 +12,6 @@ import '../../core/constant/text_style.dart';
 import '../../widget/card/product_card.dart';
 
 class FavoriteScreen extends StatelessWidget {
-
   FavoriteScreen({super.key});
   @override
   Widget build(BuildContext context) {
@@ -25,6 +24,7 @@ class FavoriteScreen extends StatelessWidget {
               return SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
+                    AppUI.verticalGap(),
                     Text('Favorilerin', style: AppTextStyle.homeHeader),
                     AppUI.verticalGap(),
                     GridView.builder(

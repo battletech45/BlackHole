@@ -20,13 +20,17 @@ class CampaignDetailScreen extends StatelessWidget {
       backgroundColor: AppColor.black,
       child: SafeArea(
         child: SingleChildScrollView(
+          padding: AppUI.pageFullSidePadding / 2,
           child: Column(
             children: <Widget>[
               CachedNetworkImage(imageUrl: model.imageUrl),
               AppUI.verticalGap(),
               Text(model.title, style: AppTextStyle.ratingOverallText),
+              AppUI.verticalGap(0.5),
+              Text(model.date.toString(), style: AppTextStyle.fieldHint),
               AppUI.verticalGap(),
-              Text(model.date.toString(), style: AppTextStyle.fieldHint)
+              Text(model.content),
+              AppUI.verticalGap(2),
             ],
           ),
         ),

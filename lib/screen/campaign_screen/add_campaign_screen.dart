@@ -127,7 +127,8 @@ class _AddCampaignScreenState extends State<AddCampaignScreen> {
                   child: Text('Haberi Ekle', style: AppTextStyle.bigButtonText.copyWith(color: AppColor.white)),
                   onTap: send,
                 ),
-              )
+              ),
+              AppUI.verticalGap(2)
             ],
           ),
         ),

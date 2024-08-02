@@ -41,6 +41,7 @@ class _CampaignScreenState extends State<CampaignScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
+              AppUI.verticalGap(),
               SizedBox(
                   width: 250.w,
                   child: Text("Black Hole'den Haberler", style: AppTextStyle.homeHeader, textAlign: TextAlign.center)

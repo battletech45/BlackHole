@@ -44,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMi
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
+              AppUI.verticalGap(),
               HomeHeader(),
               //HomeCategorySlider(data: data),
               AppUI.verticalBlankSpace,

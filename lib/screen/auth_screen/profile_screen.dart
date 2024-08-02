@@ -22,6 +22,7 @@ class ProfileScreen extends StatelessWidget {
         child: !context.watch<AutherProvider>().isAuth ? GuestProfileScreen() : SingleChildScrollView(
           child: Column(
             children: <Widget>[
+              AppUI.verticalGap(),
               Text('Profil', style: AppTextStyle.homeHeader),
               AppUI.verticalGap(),
               Row(
