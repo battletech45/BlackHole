@@ -6,7 +6,7 @@ import '../../core/constant/text_style.dart';
 import '../../core/constant/ui_const.dart';
 import '../../core/service/provider/theme.dart';
 
-enum AlertType { warn, info, approved, denied, joining }
+enum AlertType { approved, denied }
 
 /// Basit Alert Dialog
 ///
@@ -154,15 +154,9 @@ class AppAlertDialog extends StatelessWidget {
     } else {
       if (type == AlertType.approved) {
         return Lottie.asset('assets/lottie/check.json', repeat: repeat ?? false);
-      } else if (type == AlertType.info) {
-        return Lottie.asset('assets/lottie/info.json', repeat: repeat ?? false);
       } else if (type == AlertType.denied) {
         return Lottie.asset('assets/lottie/cancel.json', repeat: repeat ?? false);
-      } else if (type == AlertType.joining){
-        return Lottie.asset('assets/lottie/join.json', repeat: repeat ?? false);
-      } else if (type == AlertType.warn) {
-        return Lottie.asset('assets/lottie/warning.json', repeat: repeat ?? false);
-      } else {
+      }else {
         return AppUI.zeroGap;
       }
     }

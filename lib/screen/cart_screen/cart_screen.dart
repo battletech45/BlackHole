@@ -36,7 +36,7 @@ class _CartScreenState extends State<CartScreen> {
                         shrinkWrap: true,
                         itemCount: service.cart.length,
                         itemBuilder: (context, index) {
-                          return CartProductCard(imageURL: AppAsset.testPhoto, title: 'El Salvador Finca Majan', size: 'small', price: '25.00');
+                          return CartProductCard(imageURL: AppAsset.appBG, title: 'El Salvador Finca Majan', size: 'small', price: '25.00');
                         }
                     ),
                   );

@@ -27,15 +27,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
   DocumentSnapshot? userDoc;
 
   Future<void> getData() async {
-    try {
-      final retData = await FirebaseService.getUserData(context.read<AutherProvider>().user!.uid);
-      setState(() {
-        userDoc = retData;
-      });
-    }
-    catch(e) {
-      LoggerService.logError(e.toString());
-      rethrow;
+    if(context.read<AutherProvider>().isAuth) {
+      try {
+        final retData = await FirebaseService.getUserData(context.read<AutherProvider>().user?.uid ?? '');
+        setState(() {
+          userDoc = retData;
+        });
+      }
+      catch(e) {
+        LoggerService.logError(e.toString());
+        rethrow;
+      }
     }
   }
 

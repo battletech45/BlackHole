@@ -180,7 +180,9 @@ class AutherProvider with ChangeNotifier {
       notifyListeners();
       return null;
     }
-    return 'Kullanıcı Adı veya Şifre Hatalı';
+    else {
+      return 'Kullanıcı Adı veya Şifre Hatalı';
+    }
   }
 
   Future<String?> register(String name, LoginModel model, String phoneNumber,) async {
@@ -192,6 +194,8 @@ class AutherProvider with ChangeNotifier {
       notifyListeners();
       return null;
     }
-    return 'Kullanıcı Adı veya Şifre Hatalı';
+    else {
+      return 'Kullanıcı Adı veya Şifre Hatalı';
+    }
   }
 }
