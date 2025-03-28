@@ -48,18 +48,17 @@ class _LandingScreenState extends State<LandingScreen> with SingleTickerProvider
     }
     return Scaffold(
       extendBody: true,
-      body: SafeArea(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Center(
-                child: Image.asset(AppAsset.appLogo, width: 200.w, height: 200.h, fit: BoxFit.cover),
-              ),
-              const LoadingWidget(color: AppColor.white, size: 50),
-            ],
-          ),
+      body: Container(
+        color: AppColor.black,
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Center(
+              child: Image.asset(AppAsset.appLogo, width: 200.w, height: 200.h, fit: BoxFit.cover),
+            ),
+            const LoadingWidget(color: AppColor.white, size: 50),
+          ],
         ),
       ),
     );

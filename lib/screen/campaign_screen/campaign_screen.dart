@@ -1,3 +1,4 @@
+import 'package:black_hole/core/constant/colors.dart';
 import 'package:black_hole/core/constant/text_style.dart';
 import 'package:black_hole/core/model/campaign.dart';
 import 'package:black_hole/core/service/firebase.dart';
@@ -44,7 +45,7 @@ class _CampaignScreenState extends State<CampaignScreen> {
               AppUI.verticalGap(),
               SizedBox(
                   width: 250.w,
-                  child: Text("Black Hole'den Haberler", style: AppTextStyle.homeHeader, textAlign: TextAlign.center)
+                  child: Text("Black Hole'den Haberler", style: AppTextStyle.homeHeader.copyWith(color: AppColor.white), textAlign: TextAlign.center)
               ),
               AppUI.verticalGap(),
               GridView.builder(

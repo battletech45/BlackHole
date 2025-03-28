@@ -52,11 +52,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  Text('Description', style: AppTextStyle.productTitle),
+                  Text('Description', style: AppTextStyle.productTitle.copyWith(color: AppColor.white)),
                   AppUI.verticalGap(0.3),
-                  Text('${widget.model.description}'),
+                  Text('${widget.model.description}', style: AppTextStyle.registerText.copyWith(color: AppColor.white)),
                   AppUI.verticalGap(),
-                  Text('Ingredients', style: AppTextStyle.productTitle),
+                  Text('Ingredients', style: AppTextStyle.productTitle.copyWith(color: AppColor.white)),
                   AppUI.verticalGap(0.3),
                   SizedBox(
                     height: 40.h,
@@ -71,7 +71,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     ),
                   ),
                   AppUI.verticalGap(0.3),
-                  Text('Size', style: AppTextStyle.productTitle),
+                  Text('Size', style: AppTextStyle.productTitle.copyWith(color: AppColor.white)),
                   SizedBox(
                     height: 85.h,
                     width: MediaQuery.of(context).size.width,

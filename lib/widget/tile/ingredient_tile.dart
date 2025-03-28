@@ -27,7 +27,7 @@ class IngredientTile extends StatelessWidget {
             child: Icon(Icons.check, color: AppColor.buttonText),
           ),
           AppUI.horizontalGap(0.2),
-          Text(title, style: AppTextStyle.productTitle)
+          Text(title, style: AppTextStyle.productTitle.copyWith(color: AppColor.white))
         ],
       ),
     );

@@ -42,7 +42,7 @@ class NewsCard extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text('Detaylar için'),
+                  Text('Detaylar için', style: AppTextStyle.extraText.copyWith(color: AppColor.white)),
                   Icon(Icons.arrow_right_alt, color: AppColor.white)
                 ],
               )

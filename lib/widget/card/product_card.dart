@@ -44,7 +44,7 @@ class ProductCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(title, style: AppTextStyle.bigButtonText),
+                Text(title, style: AppTextStyle.bigButtonText.copyWith(color: AppColor.white)),
                 Container(
                   padding: AppUI.pageFullSidePadding / 3,
                   decoration: BoxDecoration(
@@ -69,7 +69,7 @@ class ProductCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Text(price, style: AppTextStyle.registerText),
+                    Text(price, style: AppTextStyle.registerText.copyWith(color: AppColor.white)),
                     AppUI.horizontalGap(0.2),
                     Text('₺', style: TextStyle(color: AppColor.buttonBG, fontSize: 15.sp))
                   ],

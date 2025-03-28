@@ -48,7 +48,7 @@ class ProductHeader extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     SquareButton(backgroundColor: AppColor.borderColor.withOpacity(0.5), icon: Icons.arrow_back_ios_new, iconColor: AppColor.white, paddingScale: 2, onTap: () {context.pop();}),
-                    Text(title, style: AppTextStyle.bigButtonText),
+                    Text(title, style: AppTextStyle.bigButtonText.copyWith(color: AppColor.white)),
                     SquareButton(
                         backgroundColor: AppColor.borderColor.withOpacity(0.5),
                         icon: isFavorited ? Icons.favorite : Icons.favorite_border,

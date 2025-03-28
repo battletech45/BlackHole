@@ -19,12 +19,12 @@ class PriceTile extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text('Price', style: AppTextStyle.bigButtonText),
+            Text('Price', style: AppTextStyle.bigButtonText.copyWith(color: AppColor.white)),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Text(price, style: AppTextStyle.bigButtonText),
+                Text(price, style: AppTextStyle.bigButtonText.copyWith(color: AppColor.white)),
                 AppUI.horizontalGap(0.2),
                 Text('₺', style: TextStyle(color: AppColor.buttonBG, fontSize: 16.sp))
               ],
