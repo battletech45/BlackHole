@@ -7,48 +7,28 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:207119378431:android:926a73ff5675182e1929ca",
-        "android_client_info": {
-          "package_name": "com.coffecodie.blackhole"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "207119378431-hkrldsphir2oj573dm55c50j06l8kg2p.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDAOdrKBfhqJLK037rk2Q5TLIX6SbAhN7g"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "207119378431-hkrldsphir2oj573dm55c50j06l8kg2p.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "207119378431-5qmru5slr5chh969aq859tl5qrnj5cpo.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.blackHole"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:207119378431:android:498513005f0d0b611929ca",
         "android_client_info": {
           "package_name": "com.coffeecoddie.blackhole"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "207119378431-jcit7gtk1gdha2qb9k5q66eflcoralga.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.coffeecoddie.blackhole",
+            "certificate_hash": "874b05f3beab43c9a0673add6b69d443116a32f6"
+          }
+        },
+        {
+          "client_id": "207119378431-kq43kect9takmt55g3g9b9ib2i65dqi3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.coffeecoddie.blackhole",
+            "certificate_hash": "82a5bbd1c0c1db1e12c2b92542ecff36009dcbfa"
+          }
+        },
         {
           "client_id": "207119378431-hkrldsphir2oj573dm55c50j06l8kg2p.apps.googleusercontent.com",
           "client_type": 3

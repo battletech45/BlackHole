@@ -70,7 +70,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '207119378431',
     projectId: 'blackholecafe-d6622',
     storageBucket: 'blackholecafe-d6622.appspot.com',
-    androidClientId: '207119378431-n5uga18vtgon6hnd4h8c3bdmgc2027g1.apps.googleusercontent.com',
+    androidClientId: '207119378431-jcit7gtk1gdha2qb9k5q66eflcoralga.apps.googleusercontent.com',
     iosClientId: '207119378431-ofnmat5mi79q8gm6ipmqrermfknearho.apps.googleusercontent.com',
     iosBundleId: 'com.coffeecoddie.blackhole',
   );
