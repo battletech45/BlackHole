@@ -19,7 +19,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   flutter_screenutil: ^5.9.3
   flutter_native_splash: ^2.4.1
-  flutter_barcode_scanner: ^2.0.0
+  #flutter_barcode_scanner: ^2.0.0
   loading_animation_widget: ^1.2.1
   dashed_circular_progress_bar: ^0.0.6
   cached_network_image: ^3.3.1

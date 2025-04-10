@@ -6,7 +6,6 @@ import 'package:black_hole/widget/base/scaffold.dart';
 import 'package:black_hole/widget/button/loading_button.dart';
 import 'package:black_hole/widget/dialog/alert_dialog.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -23,6 +22,7 @@ class FreeProductScreen extends StatefulWidget {
 class _FreeProductScreenState extends State<FreeProductScreen> {
   String? _scanBarcode = 'Unknown';
 
+  /*
   Future<void> scanQR() async {
     String barcodeScanRes;
     try {
@@ -38,6 +38,8 @@ class _FreeProductScreenState extends State<FreeProductScreen> {
       _scanBarcode = barcodeScanRes;
     });
   }
+
+   */
 
 
   @override
@@ -60,6 +62,7 @@ class _FreeProductScreenState extends State<FreeProductScreen> {
               backgroundColor: AppColor.buttonBG,
                 child: Text('TARA', style: AppTextStyle.bigButtonText.copyWith(color: AppColor.white)),
                 onTap: () async {
+                /*
                   await scanQR().then((value) async {
                     if(_scanBarcode != null) {
                       final process = await FirebaseService.getFreeProduct(_scanBarcode!);
@@ -75,7 +78,10 @@ class _FreeProductScreenState extends State<FreeProductScreen> {
                       });
                     }
                   });
+
+                 */
                 }
+
             ),
           )
         ],
